@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <!--자바스크립트 기본 - 연산자
+    문자 + 숫자 주의사항 -->
+
+    <meta charset='utf-8'>
+</head>
+</body>
+    <script>
+        //TEST 1.
+        alert("TEST 1");
+        alert(2 + 3 + '1'); // 51 출력. 좌에서 우로 계산 진행.
+                            // +는 문자열 연결과 변환의 기능도 제공. 
+        
+        //TEST 2.
+        alert("TEST 2");
+        let str = '가나다';
+        alert(typeof str);  //string
+        str = +str;
+        alert(typeof str);  //number (형 변환됨)
+
+        //TEST 3.
+        alert("TEST 3");
+        let two = "2";
+        let three = "3";
+        alert(two + three);   //23
+        alert(+two + +three); //5  (+로 인한 숫자형 변환)
+
+    </script>
+    
+</body>
+</html>
