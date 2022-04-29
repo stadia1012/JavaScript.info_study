@@ -10,14 +10,12 @@
     <script>
         //비교하려는 값의 자료형이 다르면 숫자형으로 바꾼다.
         function exam1() {
-            alert('#1');
             alert(0 == false); // true
             alert('' == false); // true
         };
 
         //아래와 같은 흥미로운 경우도 발생함.
         function exam2() {
-            alert('#2');
             let a = 0;
             alert( Boolean(a) ); // false
             let b = "0";
@@ -26,16 +24,36 @@
             alert(a == b); // true  // Boolean 값은 다르지만 숫자형으로 변환한 값은 같음.
         };
 
-        //null과 undefined는 특별규칙 적용. 동등연산자 true 반환함
+        //null과 undefined는 특별규칙 적용. 동등연산자로 비교시 true 반환함.
         function exam3() {
-            alert('#3');
             alert(null == undefined); //true
+        //일치연산자는 false
+            alert(null===undefined); //false
+        //다른 비교 연산자에선 다시 null은 0, undefined는 NaN로 형 변환되어 비교됨.
         };
+
+        //null과 0
+        function exam4() {
+            alert( `null > 0 : ${null > 0}` );  // false
+            alert( null == 0 ); // false
+            alert( null >= 0 ); // true
+        /*null은 숫자형으로 변환되어 0이되지만, 동등연산자(==)는 undefined와 null일 때 형변환을 하지 않음.
+        (*중요)따라서 undefined와 null은 undefined와 null을 비교하는 경우에만 true를 반환하고
+        이외의 경우 무조건 false를 반환한다.
+        
+        +undefined는 null이나 undefined와 같고 나머지 비교는 모두 false를 반환. (숫자형이 NaN이기 때문)*/
+        }
+
+        /* 과제 */
+        function exam5() {
+            alert
+        }
+
     </script>
 
     <a href="#" onclick="exam1();">#1</a>
     <a href="#" onclick="exam2();">#2</a>
     <a href="#" onclick="exam3();">#3</a>
-    
+    <a href="#" onclick="exam4();">#4</a>
 </body>
 </html>
