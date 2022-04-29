@@ -8,10 +8,58 @@
 
 </body>
     <script>
+    //OR[||] 사용의 예
+        function exam1() {
+            let hour = prompt('현재 시간은?', '');
+            if (hour < 10 || hour > 18) {
+                alert('영업시간이 아닙니다.');
+            } else {
+                alert('영업시간입니다.');
+            }
+        }  
+
+    //OR의 추가 기능 : 가장 최초의 불린 값이 true인 피연산자 반환.(truthy)
+    //모두 false면 마지막 피연산자 반환.    
+        function exam2() {
+            alert( 0 || null || undefined );  //undefined 모두 false이므로.
+            alert( 0 || null || 7 || 5 ); // 7
+        }  
+
+    //AND[&&]도 추가 기능을 갖는다. 가장 최초의 falsy 값을 반환. falsy가 없다면 마지막 값 반환.
+        function exam3() {
+            alert( 1 && 2 && null && 3 ); // null
+            alert( 1 && 2 && 3 );         // 3
+
+        }
+    // *참고* &&의 우선순위가 || 보다 높다.
+        
+
+    //문제1. OR 연산자의 피연산자가 alert이라면?
+        function exam4() {
+            alert( alert(1) || 2 || alert(3) ); // 1, 2가 출력됨.
+        //alert은 반환값이 없음(undefined 반환) 첫번째 피연산자가 평가되면 1이 출력. false이므로 계속 진행. 2출력.
+        }
+    
+    //문제2. AND 연산자의 피연산자가 alert이라면?
+        function exam5() {
+            alert( alert(1) && 2 && alert(3) ); // 1, undefined가 출력됨.
+        //alert(1)이 평가되며 1출력. undefined가 반환되므로 undefined 출력.
+        }
+
+    //문제3. AND OR 연산자로 구성된 표현식
+        function exman6() {
+            alert( null || 2 && 3 || 4 );  // 3 출력.
+            //&& 먼저 계산 -> 이후 ( null || 3 || 4 )와 같음. 
+        }
+
+    //문제4. 
 
     </script>
 
     <a href="#" onclick="exam1();">#1</a>
     <a href="#" onclick="exam2();">#2</a>
+    <a href="#" onclick="exam3();">#3</a>
+    <a href="#" onclick="exam4();">문제1</a>
+    <a href="#" onclick="exam5();">문제2</a>
 </body>
 </html>
