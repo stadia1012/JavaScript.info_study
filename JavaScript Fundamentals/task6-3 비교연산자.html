@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <!--자바스크립트 기본 - 비교 연산자-->
+    <meta charset='utf-8'>
+    <link rel="stylesheet" href="taskCSS_1.css" type="text/css">
+</head>
+
+</body>
+    <script>
+        //비교하려는 값의 자료형이 다르면 숫자형으로 바꾼다.
+        function exam1() {
+            alert('#1');
+            alert(0 == false); // true
+            alert('' == false); // true
+        };
+
+        //아래와 같은 흥미로운 경우도 발생함.
+        function exam2() {
+            alert('#2');
+            let a = 0;
+            alert( Boolean(a) ); // false
+            let b = "0";
+            alert( Boolean(b) ); // true
+    
+            alert(a == b); // true  // Boolean 값은 다르지만 숫자형으로 변환한 값은 같음.
+        };
+
+        //null과 undefined는 특별규칙 적용. 동등연산자 true 반환함
+        function exam3() {
+            alert('#3');
+            alert(null == undefined); //true
+        };
+    </script>
+
+    <a href="#" onclick="exam1();">#1</a>
+    <a href="#" onclick="exam2();">#2</a>
+    <a href="#" onclick="exam3();">#3</a>
+    
+</body>
+</html>
