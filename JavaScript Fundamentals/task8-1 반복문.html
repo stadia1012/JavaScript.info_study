@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <!--자바스크립트 기본 - 반복문-->
+    <meta charset='utf-8'>
+    <link rel="stylesheet" href="taskCSS_1.css" type="text/css">
+</head>
+
+</body>
+    <script>
+        function exam1() {
+            let x;          //while 조건식에서 변수 사용시에 꼭 전에 선언해야.
+            while( x != 100) {
+                x = prompt('(1)숫자 입력 : ', "");
+                if (x < 100){
+                    alert('더 올리세요.');
+                } else if (x > 100) {
+                    alert('더 내리세요.');
+                } else {
+                    alert('정답입니다.');
+                }
+            }
+        }
+
+        function exam2() {
+            while(1) {
+                let y = prompt('(2)숫자 입력 : ', "");
+                if (y == null) {             //취소 확인. // null은 null과 undefined만 동등함.
+                    alert('취소했습니다.');
+                    break;
+                }
+                if (isNaN(y)) {              // 숫자인지 확인.
+                    alert('숫자가 아닙니다.');
+                    continue;
+                }
+                if (y < 100){                  //크기 판별 시작.
+                    alert('더 올리세요.');
+                } else if (y > 100) {
+                    alert('더 내리세요.');
+                } else {
+                    alert('정답입니다.');
+                    break;
+                }
+            }
+        }
+
+    </script>
+
+    <a href="#" onclick="exam1();">#1</a>
+    <a href="#" onclick="exam2();">#2</a>
+    <a href="#" onclick="exam3();">#3</a>
+</body>
+</html>
