@@ -8,17 +8,25 @@
 
 </body>
     <script>
+        //(기능 : 피연산자 중 ‘값이 할당된’ 변수를 빠르게 찾을 수 있다 / 0도 포함)
+        
         // ?? 연산자 기본형
-        x = a ?? b;
+        let x = a ?? b;
         //a가 null도 아니고 undefined도 아니면 a
         x = (a !== null && a !== undefined) ? a : b;
         //위 두 식은 동일한 동작을 한다.
     
         //OR과의 차이
-        let height = 0;
+        function exam1() {
+            let height = 0;
 
-        alert(height || 100); // 100
-        alert(height ?? 100); // 0
+            alert(height || 100); // 100 -> 0은 falsy한 값으로 취급
+            alert(height ?? 100); // 0   -> 정확하게 null과 undefined만 100을 출력
+
+        //안전성 문제로 괄호없이 &&, ||과 같이 사용 불가
+        }
+        
+
 
 
     </script>

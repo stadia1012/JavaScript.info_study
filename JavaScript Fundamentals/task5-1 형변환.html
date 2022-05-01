@@ -1,19 +1,45 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <!--자바스크립트 기본 - 형변환
-    문자형 변수를 숫자형으로 변환하면 값은 NaN.
-    typeof(변수)를 하면 숫자형(number)이 나오는지? >> 나옴 -->
-
+    <!--자바스크립트 기본 - 형변환-->
     <meta charset='utf-8'>
+    <link rel="stylesheet" href="taskCSS_1.css" type="text/css">
 </head>
 </body>
     <script>
-        let str = "가나다라";
-        str = Number(str);
-        alert(str);  // NaN
-        alert(typeof str);  //number
+        //문자형 변수를 숫자형으로 변환하면 값은 NaN.
+        //typeof(변수)를 하면 숫자형(number)이 나오는지? >> 나옴 
+        function exam1() {
+            let str = "가나다라";
+            str = Number(str);
+            alert(str);  // NaN
+            alert(typeof str);  //number
+        }
+        
+        /*String -> 숫자형 변환시
+        처음과 끝 공백이 제거됨.
+        남아있는 문자열이 없다 -> 0
+        그렇지 않다 -> 문자열에서 숫자를 읽음. 변환에 실패하면 NaN */
+        function exam2() { //공백의 Number 형변환
+            let test1 = " ";
+            alert(+test1);   //0
+            let test2 = "   ";
+            alert(+test2);   //0
+        }
+        
+        //null -> 0, undefined -> NaN
+        function exam3() {
+            let test3 = null;
+            let test4;     //undefined
+            alert( +test3 );   //0
+            alert( +test4 );   //NaN
+        }
+        
     </script>
     
+    <a href="#" onclick="exam1();">#1</a>
+    <a href="#" onclick="exam2();">#2</a>
+    <a href="#" onclick="exam3();">#3</a>
+
 </body>
 </html>
