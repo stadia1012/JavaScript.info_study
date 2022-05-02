@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <!--자바스크립트 기본 - nullish 병합연산자-->
+    <meta charset='utf-8'>
+    <link rel="stylesheet" href="taskCSS_1.css" type="text/css">
+</head>
+
+</body>
+    <script>
+        //인라인 변수
+        function exam1() {
+            for (let i=0; i<3; i++) {
+                alert(i);
+            }
+            alert(i);  //브라우저 console 창에서 에러 확인. 반복문 안에서만 접근 가능.
+        }
+        function exam2() {
+            let i=0;
+            for (let i=0; i<3; i++) { //let을 붙이면 새로운 인라인 변수 선언.
+                alert(i);  //0, 1, 2
+            }
+            alert(i);  //0 
+        }
+        function exam3() {
+            let i=0;
+            for (i=0; i<3; i++) { //for문 밖에서 정의된 i 사용.
+                alert(i);  //0, 1, 2
+            }
+            alert(i);  //3
+        }
+
+        //무한반복문 + break의 예
+        function exam4() {
+            let sum = 0;
+
+            while (true) {
+                let value = +prompt("숫자를 입력하세요.", '');
+                if (!value) break; //입력 없을 때까지. (단, 0도 break 됨.) 
+                sum += value;
+            }
+            alert( '합계: ' + sum );
+        }
+
+        //break lable
+        function exam5() {
+            outer: for (let i=0; i<3; i++) {  //'outer' lable
+                for (let j=0; j<3; j++) {
+                    let input = prompt(`${i},${j}의 값 : `, ' ');
+                    if (!input) break outer;  //outer를 한번에 빠져나오기 가능.
+                }
+            }
+            alert('완료!');
+        }
+        // <주의>break와 continue는 반복문 안에서만 사용. 레이블은 반드시 break이나 continue보다 위에 와야.
+        
+    </script>
+
+    <a href="#" onclick="exam1();">#1</a>
+    <a href="#" onclick="exam2();">#2</a>
+    <a href="#" onclick="exam3();">#3</a>
+    <a href="#" onclick="exam4();">#4</a>
+    <a href="#" onclick="exam5();">#5</a>
+</body>
+</html>
