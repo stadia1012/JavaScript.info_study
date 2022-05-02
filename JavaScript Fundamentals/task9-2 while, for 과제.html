@@ -21,11 +21,13 @@
         function exam2() {
             //for문
             alert('for문');
+            
             for (let i = 0; i < 3; i++) {
                 alert( `number ${i}!` );
             }
             //동일한 while문 //해답과 정확히 일치 :)
             alert('while문');
+            
             let i = 0;
             while (i < 3) {
                 alert( `number ${i}!` );
@@ -39,13 +41,13 @@
             nextPrime:
             for (let i = 2; i <= n; i++) {
                 for (let j = 2; j < i; j++) //j는 i를 나눌 정수.(제수)
-                    if (i % j == 0) { //나누어 떨어지면 continue.
+                    if (i % j == 0) {  //나누어 떨어지면 continue.
                         continue nextPrime;
                     }
                 alert(i); //소수 출력.
             }
         }
-
+    //(다음 챕터인 switch문은 많이 다뤄봤으므로 패스)
 
     </script>
 

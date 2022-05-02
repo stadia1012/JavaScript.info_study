@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <!--자바스크립트 기본 - 함수 - 외부변수, 매개변수, 기본값-->
+    <meta charset='utf-8'>
+    <link rel="stylesheet" href="taskCSS_1.css" type="text/css">
+</head>
+
+</body>
+    <script>
+        //함수의 외부변수 내부변수 //알고있지만 중요한 것만 정리.
+        function exam1() {
+            let userName = 'John';  //showMessage 함수 입장에서 외부변수 선언. (전역변수)
+
+            function showMessage() {
+                let userName = "Bob"; //같은 이름을 가진 지역변수 선언.
+
+                let message = 'Hello, ' + userName;
+                alert(message);
+            }
+            alert( userName );  //John //함수 호출 전이므로.
+            showMessage();      //Hello, Bob
+            alert( userName );  //John //외부변수는 건들지 않음. userName앞에 let을 지웠다면 수정 가능.
+        }
+
+
+        //매개변수는 외부변수에 반영되지 않음.
+        function exam2() {
+            function showMessage(from, text) {
+                from = '*' + from + '*';
+                alert(from + ': ' + text);
+            }
+
+            let from = "Ann";
+            showMessage(from, "Hello");  //'*Ann*: Hello' 
+            alert(from); //Ann //함수 안에서 from이 수정되었지만, 복사한 것이기 때문에 외부변수에 영향을 주지 못함.
+        }
+
+
+        //매개변수의 기본값
+        function exam3() {
+            function showMessage1(from, text='default message1') {
+                alert(from + ': ' + text);
+            }
+
+            let argument1 = prompt('인수1을 입력하세요. : ', '');
+            let argument2 = prompt('인수2을 입력하세요. : ', '');
+            showMessage1(); //undefined: default message //이렇게 해야 default 출력.
+            showMessage1(argument1, argument2); //입력 안하면 ": "만 출력. //string 타입의 ''이 저장됨.
+
+            function showMessage2(from, text) {
+                from = from || 'anonymous';  //또는 if(from===undefined) {text='anonymous'};
+                text = text || 'default message2';
+                alert(from + ': ' + text);
+            }
+            showMessage2(argument1, argument2); // from: default message2 //입력 안 할 경우, 취소할 경우 둘 다 적용.
+        }
+    
+    </script>
+
+    <a href="#" onclick="exam1();">#1</a>
+    <a href="#" onclick="exam2();">#2</a>
+    <a href="#" onclick="exam3();">#3</a>
+</body>
+</html>
