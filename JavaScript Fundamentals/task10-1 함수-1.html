@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <!--자바스크립트 기본 - 함수 - 외부변수, 매개변수, 기본값-->
+    <!--자바스크립트 기본 - 함수-1 외부변수, 매개변수, 기본값-->
     <meta charset='utf-8'>
     <link rel="stylesheet" href="taskCSS_1.css" type="text/css">
 </head>
@@ -13,14 +13,14 @@
             let userName = 'John';  //showMessage 함수 입장에서 외부변수 선언. (전역변수)
 
             function showMessage() {
-                let userName = "Bob"; //같은 이름을 가진 지역변수 선언.
+                let userName = "Bob"; //같은 이름을 가진 지역변수 선언. let 없으면 전역변수 userName이 수정됨.
 
                 let message = 'Hello, ' + userName;
                 alert(message);
             }
             alert( userName );  //John //함수 호출 전이므로.
             showMessage();      //Hello, Bob
-            alert( userName );  //John //외부변수는 건들지 않음. userName앞에 let을 지웠다면 수정 가능.
+            alert( userName );  //John //외부변수는 건들지 않음. (userName앞에 let을 지웠다면 수정 가능)
         }
 
 

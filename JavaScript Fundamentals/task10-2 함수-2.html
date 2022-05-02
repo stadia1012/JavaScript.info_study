@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <!--자바스크립트 기본 - 함수-2 반환 값-->
+    <meta charset='utf-8'>
+    <link rel="stylesheet" href="taskCSS_1.css" type="text/css">
+</head>
+
+</body>
+    <script>
+        /*반환 값(return value)
+        특징 : 지시자 return을 만나면 함수 실행은 즉시 중단됨.
+        return이 없거나 return만 있는 함수는 undefined를 반환*/
+        
+        //하나의 함수에 여러 return 예시. if 조건문에 alert이 오는게 새로워서 가져옴.
+        function exam1() { 
+            function checkAge(age) {
+                if (age >= 18) {
+                    return true;
+                } else {
+                    return confirm('보호자의 동의를 받으셨나요?');
+                    }
+                }
+
+                let age = prompt('나이를 알려주세요', 18);
+
+                if ( checkAge(age) ) {
+                    alert( '접속 허용' );
+                } else {
+                    alert( '접속 차단' );
+                }
+        }
+
+    </script>
+
+    <a href="#" onclick="exam1();">#1</a>
+    <a href="#" onclick="exam2();">#2</a>
+    <a href="#" onclick="exam3();">#3</a>
+</body>
+</html>
