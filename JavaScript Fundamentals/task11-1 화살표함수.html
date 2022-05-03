@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <!--자바스크립트 기본 - 화살표함수-->
+    <meta charset='utf-8'>
+    <link rel="stylesheet" href="taskCSS_1.css" type="text/css">
+</head>
+
+<body>
+    <script>
+        /*
+        let func = function(arg1, arg2, ...argN) {
+            return expression;
+        };  -> 일반 함수표현식
+
+        let func = (arg1, arg2, ...argN) => expression
+            -> 화살표 함수
+        */
+
+        function exam1() {
+            let sum1 = (a, b) => a + b;  //화살표 함수. 
+
+            let sum2 = function(a, b) {  //동일한 함수표현식.
+                return a + b;
+            };
+
+            alert(sum1(3, 5));
+            alert(sum2(3, 5));
+        }
+        //인수가 하나면 괄호 생략가능. 인수가 없을땐 () 빈 괄호 필수.
+
+        //동적 화살표함수
+        function exam2() {
+            let age = prompt("나이를 알려주세요.", 18);
+
+            let welcome = (age < 18) ?
+                () => alert('안녕') :
+                () => alert("안녕하세요!");
+
+            welcome();
+        }
+
+        function exam3() {
+            let sum3 = (a, b) => {   //본문이 여러 줄일 경우 중괄호 사용. 반드시 return 필요.
+                let result = a + b + 3;
+                return result; 
+            };
+
+            alert(sum3(1, 2));
+        }
+
+        //과제 - 아래 함수를 화살표 함수로 바꾸기.
+        function exam4() {
+            function ask(question, yes, no) {
+                if (confirm(question)) yes()
+                else no();
+            }
+            
+            ask(
+                "동의하십니까?(1)",
+                function() { alert("동의하셨습니다."); },
+                function() { alert("취소 버튼을 누르셨습니다."); }
+            );
+
+            let ask1 = (question, yes, no) => {
+                if (confirm(question)) yes()
+                else no();
+            };
+
+            ask(
+                "동의하십니까?(2)",
+                () => alert("동의하셨습니다."),
+                () => alert("취소 버튼을 누르셨습니다.")
+            );
+        }
+
+    </script>
+
+    <a href="#" onclick="exam1();">#1</a>
+    <a href="#" onclick="exam2();">#2</a>
+    <a href="#" onclick="exam3();">#3</a>
+    <a href="#" onclick="exam4();">과제</a>
+
+</body>
+</html>
