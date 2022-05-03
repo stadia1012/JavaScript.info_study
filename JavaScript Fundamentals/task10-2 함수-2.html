@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="taskCSS_1.css" type="text/css">
 </head>
 
-</body>
+<body>
     <script>
         /*반환 값(return value)
         특징 : 지시자 return을 만나면 함수 실행은 즉시 중단됨.
@@ -31,10 +31,58 @@
                 }
         }
 
+        function exam2() {
+            function checkAge(age) {
+                if (age > 18) {
+                    return true;
+                } else {
+                    return confirm('보호자의 동의를 받으셨나요?');
+                    }
+                }
+            //위 함수와 동일한 함수를 ?, || 이용해 만들기
+
+            // ? 사용
+            function checkAge1(age) {
+                return (age > 18) ? true : confirm('보호자의 동의를 받으셨나요?');
+            }
+
+            // || 사용
+            function checkAge2(age) {
+                return (age > 18) || confirm('보호자의 동의를 받으셨나요?');
+            // (age > 18)가 truthy하면 (age > 18)을 반환. -> true 반환.
+            // falsy하면 || 이후 것 반환.
+            }  
+        }
+
+        //a와 b 중 작은 값을 반환해주는 함수, min(a,b)을 만들어보세요.
+        function exam3() {
+            function min(a, b) {
+                if (a > b) {
+                    return b;
+                }
+                else {
+                    return a;
+                }
+            }
+            alert(min(5, 10));
+            alert(min(7, 3));
+            alert(min(4, 4));
+        }
+
+        //x의 n제곱을 반환해주는 함수, pow(x, n)을 만들어보세요.
+        function exam4() {
+            function pow(xx, nn) {
+                return (xx**nn);
+            }
+            let x = prompt('정수를 입력 :', '');
+            let n = prompt('지수를 입력 :', '');
+            alert(pow(x, n));
+        }
     </script>
 
     <a href="#" onclick="exam1();">#1</a>
     <a href="#" onclick="exam2();">#2</a>
     <a href="#" onclick="exam3();">#3</a>
+    <a href="#" onclick="exam4();">#4</a>
 </body>
 </html>
