@@ -42,7 +42,7 @@
 
         function exam3() {
             let sum3 = (a, b) => {   //본문이 여러 줄일 경우 중괄호 사용. 반드시 return 필요.
-                let result = a + b + 3;
+                let result = a + b;
                 return result; 
             };
 
@@ -60,7 +60,7 @@
                 "동의하십니까?(1)",
                 function() { alert("동의하셨습니다."); },
                 function() { alert("취소 버튼을 누르셨습니다."); }
-            );
+            ); //콜백함수
 
             let ask1 = (question, yes, no) => {
                 if (confirm(question)) yes()
