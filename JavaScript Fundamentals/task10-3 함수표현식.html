@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <!--자바스크립트 기본 - 함수표현식-->
+    <meta charset='utf-8'>
+    <link rel="stylesheet" href="taskCSS_1.css" type="text/css">
+</head>
+
+<body>
+    <script>
+        /*JavaScript에서 함수는 동작보다 값으로 취급함.*/
+        function exam1() {
+        //기존의 함수선언식
+            function sayHi1() {
+                alert("Hello");
+            }
+
+            //함수표현식 -> 함수를 만들고 변수에 할당.
+            let sayHi2 = function() {
+                alert("Hello");
+            };
+            alert(sayHi2); //코드
+            alert(sayHi1); //코드 
+            alert(sayHi2()); //'Hello' 이후 undefined 반환. (return 없으므로)
+            sayHi2(); //'Hello'  //함수표현식은 중괄호 끝에 세미콜론; 붙이기.
+        }
+        //함수표현식은 실제 실행 흐름이 해당 함수에 도달했을 때 함수를 생성
+        //함수선언식은 함수선언문이 정의되기 전에도 호출할 수 있음. (같은 블록 내에서만)
+
+        //함수 복사
+        function exam2() {
+            function sayHi3() {
+                alert("Hello");
+            }
+
+            let sayHi4 = sayHi3;
+            sayHi4();
+        }
+
+        //콜백 함수 : 다른 함수의 인자로 넘겨지는 함수.
+        function exam3() {
+            function ask(question, yes, no) {
+                if (confirm(question)) yes()
+                else no();
+            }
+
+            function showOk() {
+                alert( "동의하셨습니다." );
+            }
+            function showCancel() {
+                alert( "취소 버튼을 누르셨습니다." );
+            }
+
+            ask("동의하십니까?", showOk, showCancel); //showOk, showCancel이 콜백 함수.
+        }
+
+        //함수표현식의 사용예
+        function exam4() {
+            let age = prompt("나이를 알려주세요.", 18);
+            let welcome;  //함수 선언 
+
+            if (age < 18) {
+                welcome = function() {
+                    alert("안녕!");
+                };
+            } else {
+                welcome = function() {
+                    alert("안녕하세요!");
+                };
+            }
+            welcome(); //if 내부에서 함수선언식으로 선언했다면 같은 블록 내에서만 유효하므로, error가 남.
+        }
+
+    </script>
+
+    <a href="#" onclick="exam1();">#1</a>
+    <a href="#" onclick="exam2();">#2</a>
+    <a href="#" onclick="exam3();">#3</a>
+    <a href="#" onclick="exam4();">#4</a>
+</body>
+</html>
