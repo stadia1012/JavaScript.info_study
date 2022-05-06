@@ -10,7 +10,8 @@
     <script>
         let user ={
             name: "John",  //키: 값
-            age: 30
+            age: 30,
+            isAdmin: true,
         };
 
 
@@ -32,10 +33,50 @@
 
         // in 연산자
         function exam2() {
-            alert("age" in user);  // true
+            alert("age" in user);  // true // 따옴표 필요.
             alert("asdf" in user);  // false
 
+            let key = "name";
+            alert(key in user);  // 따옴표 없으면 변수 취급.
         }
+
+
+        // for in 반복문
+        function exam3() {
+            for (let key1 in user) {  // key1처럼 반복 변수명은 자유롭게 설정 가능.
+                alert(key1);
+                alert(user[key1]);
+            }
+        }
+        //정수는 오름차순으로 정렬. 나머진 입력 순서대로 나열됨.
+
+
+        /*과제 1
+        객체에 프로퍼티가 하나도 없는 경우 true 반환하는 함수 isEmpty(obj) 작성할 것*/
+        function exam4() {
+
+                //function isEmpty(obj) {
+                //  for (let key in obj) {
+                //     if (key in obj) {
+                //         return false;
+                //     } else {
+                //         return true;
+                //     }
+                // }
+            function isEmpty(obj) {
+                for (let key in obj) {
+                    return false;  // 프로퍼티가 하나라도 있으면 즉시 false를 반환
+                }
+                return true;
+            }
+
+            let schedule = {};
+            alert( isEmpty(schedule) );
+            schedule["8:30"] = "get up";
+            alert( isEmpty(schedule) );
+
+        }
+        
     </script>
 
     <a href="#" onclick="exam1();">#1</a>
