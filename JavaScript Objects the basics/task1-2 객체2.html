@@ -8,8 +8,34 @@
 
 <body>
     <script>
-        
-        
+        let user ={
+            name: "John",  //키: 값
+            age: 30
+        };
+
+
+        // 단축 프로퍼티 (shorthand)
+        function exam1() {
+            function makeUser(name, age) {
+                return {
+                    name,  // name: name; 과 같음.
+                    age,  // age: age; 과 같음.
+                    isMan: true,  // 단축, 일반 프로퍼티 객체 내 혼용 가능
+                }
+            }
+            let user = makeUser("stadia", 30);  //전역객체 이름만 같은 지역객체 생성.
+            alert(`name: ${user.name}, age: ${user.age}`);
+            delete user.name;  // 삭제했지만 exam1의 user.name을 삭제 했으므로, 다른 함수에서 user.name 호출시 전역객체가 정상 반환됨.
+        }
+        // 프로퍼티 키와 값이 변수 이름과 동일한 경우 사용.
+
+
+        // in 연산자
+        function exam2() {
+            alert("age" in user);  // true
+            alert("asdf" in user);  // false
+
+        }
     </script>
 
     <a href="#" onclick="exam1();">#1</a>
