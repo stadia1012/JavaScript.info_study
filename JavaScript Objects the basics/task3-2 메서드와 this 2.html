@@ -1,62 +1,85 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <!--객체: 객체 복사-->
+    <!--메서드와 this 2 (과제)-->
     <meta charset='utf-8'>
     <link rel="stylesheet" href="taskCSS_1.css" type="text/css">
 </head>
 
 <body>
     <script>
-        /* 메서드: 프로퍼티에 할당된 함수 */
-
         function exam1() {
-            let user = {
-            name: "John",
-            age: 30
+            function makeUser() {
+                return {
+                    name: "John",
+                    ref: this
+                };
             };
 
-            function sayHi() {
-            alert("안녕하세요!");
-            };
-        
-            user.sayHi = sayHi;  // 이미 정의된 함수를 이용.
-            user.sayHi();
+            let user = makeUser();
+            alert( user.ref.name );  // 결과는?  => 에러
         }
         
-
+        // 에러 안나려면
         function exam2() {
-            // 일반적인 방법
-            user1 = {
-                sayHi: function() {
-                    alert("Hello!!");
-                }
+            function makeUser() {
+                return {
+                    name: "John",
+                    ref() {
+                        return this;
+                    }
+                };
             };
-            user1.sayHi()
-
-            // 단축 구문
-            user2 = {
-                sayHi() {
-                    alert("Hello~");
-                }
-            };
-            user2.sayHi()
+        
+            let user = makeUser();
+            alert( user.ref().name );  // John
         }
 
-        // (strict mode에서 (메서드가 아닌) 함수 안에서의 this는 undefined.)
-
+        /* 계산기 만들기
+        calculator라는 객체를 만들고 세 메서드를 구현해 봅시다.
+        read()에선 프롬프트 창을 띄우고 더할 값 두 개를 입력받습니다. 입력받은 값은 객체의 프로퍼티에 저장합니다.
+        sum()은 저장된 두 값의 합을 반환합니다.
+        mul()은 저장된 두 값의 곱을 반환합니다. */
+        
         function exam3() {
-            var num = 0;
-            function showNum() {
-                alert(this.num);
+            let calculator = {
+                num1: 0,  // 초기화 안하고 'num1,' 만 했더니 안됨.
+                num2: 0,
+                read: function() {
+                    this.num1 = +prompt('첫번째 숫자를 입력하세요.', '');
+                    this.num2 = +prompt('두번째 숫자를 입력하세요.', '');
+                },
+                sum: function() {
+                    return (this.num1 + this.num2);
+                },
+                mul: function() {
+                    return (this.num1 * this.num2);
+                },
             }
-            showNum();  // 0
-            
-            var obj = {
-                num: 200,
-                func: showNum,  // 함수를 복사해 객체 간 전달할 수 있음.
-            };
-            obj.func();  // 200
+            calculator.read();
+            alert( calculator.sum() );
+            alert( calculator.mul() );
+        }
+
+        // 체이닝
+        function exam4() {
+            let ladder = {
+                step: 0,
+                up() {
+                    this.step++;
+                    return this;  // 객체 자신을 반환하도록하면 됨.
+                },
+                down() {
+                    this.step--;
+                    return this;
+                },
+                showStep() {
+                    alert( this.step );
+                    return this;
+                },
+            }
+
+            ladder.up().up().down().up().down().showStep();  // 1
         }
 
     </script>
