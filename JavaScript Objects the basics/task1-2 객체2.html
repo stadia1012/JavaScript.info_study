@@ -25,7 +25,7 @@
                 }
             }
             let user = makeUser("stadia", 30);  //전역객체 이름만 같은 지역객체 생성.
-            alert(`name: ${user.name}, age: ${user.age}`);
+            alert(`name: ${user.name}, age: ${user.age}`);  // name: stadia, age: 30
             delete user.name;  // 삭제했지만 exam1의 user.name을 삭제 했으므로, 다른 함수에서 user.name 호출시 전역객체가 정상 반환됨.
         }
         // 프로퍼티 키와 값이 변수 이름과 동일한 경우 사용.
@@ -43,7 +43,7 @@
 
         // for in 반복문
         function exam3() {
-            for (let key1 in user) {  // key1처럼 반복 변수명은 자유롭게 설정 가능.
+            for (let key1 in user) {  // key1처럼 반복 변수명은 자유롭게 설정 가능. (꼭 key가 아니어도 된다.)
                 alert(key1);
                 alert(user[key1]);
             }
@@ -64,7 +64,6 @@
             //     }
             // }
 
-
             function isEmpty(obj) {
                 for (let key in obj) {
                     return false;  // 프로퍼티가 하나라도 있으면 즉시 false를 반환
@@ -73,9 +72,9 @@
             }
 
             let schedule = {};
-            alert( isEmpty(schedule) );
+            alert( isEmpty(schedule) );  // true
             schedule["8:30"] = "get up";
-            alert( isEmpty(schedule) );
+            alert( isEmpty(schedule) );  // false
         }
         
         //월급 합계 구하기.
@@ -83,8 +82,8 @@
             let salaries = {
             John: 100,
             Ann: 160,
-            Pete: 130,
-            stadia: 250
+            Peter: 130,
+            stadia: 250,
             }
 
             let sum = 0;
