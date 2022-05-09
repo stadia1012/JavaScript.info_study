@@ -28,7 +28,7 @@
             alert( aa == bb );  // false
         }
 
-        //똑같으면서 독립적인 객체를 만들고 싶다면 ->
+        //똑같으면서 독립적인 객체를 만들고 싶다면
         function exam3() {
             let user = {
             name: "John",
@@ -46,7 +46,7 @@
             alert( user.name );  // John
         }
 
-        //assign 메서드 사용
+        //assign 메서드 사용 (얕은 복사)
         function exam4() {
             let user = {name: 'John'};
 
@@ -58,7 +58,7 @@
             console.log(user);  // {name: 'admin', canView: true, canEdit: true}
         }
 
-        // 단, 중첩 객체는 복제 불가.  lodash 라이브러리의 _.cloneDeep(obj) 등 사용해야.
+        // 단, 중첩 객체는 복제 불가.  lodash 라이브러리의 _.cloneDeep(obj) 등 사용해야. (깊은 복사)
 
     </script>
 

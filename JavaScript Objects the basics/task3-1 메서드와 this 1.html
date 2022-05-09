@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <!--객체: 객체 복사-->
+    <meta charset='utf-8'>
+    <link rel="stylesheet" href="taskCSS_1.css" type="text/css">
+</head>
+
+<body>
+    <script>
+        /* 메서드: 프로퍼티에 할당된 함수 */
+
+        function exam1() {
+            let user = {
+                name: "John",
+                age: 30
+            };
+
+            function sayHi() {
+                alert("안녕하세요!");
+            };
+        
+            user.sayHi = sayHi;  // 이미 정의된 함수를 이용.
+            user.sayHi();
+        }
+        
+
+        function exam2() {
+            // 일반적인 방법
+            user1 = {
+                sayHi: function() {
+                    alert("Hello!!");
+                }
+            };
+            user1.sayHi()  // Hello!!
+
+            // 단축 구문
+            user2 = {
+                sayHi() {
+                    alert("Hello~");  // Hello~  // 메서드 이름 같아도 됨.
+                }
+            };
+            user2.sayHi()
+        }
+
+        // (strict mode에서 (메서드가 아닌) 함수 안에서의 this는 undefined. // 엄격모드 아닐땐 같은 이름의 전역 변수)
+
+        function exam3() {
+            var num = 0;
+            function showNum() {
+                alert(this.num);
+            }
+            showNum();  // 0
+            
+            var obj = {
+                num: 200,
+                func: showNum,  // 함수를 복사해 객체 간 전달할 수 있음.
+            };
+            obj.func();  // 200
+        }
+
+    </script>
+
+    <a href="#" onclick="exam1();">#1</a>
+    <a href="#" onclick="exam2();">#2</a>
+    <a href="#" onclick="exam3();">#3</a>
+    <a href="#" onclick="exam4();">#4</a>
+
+</body>
+</html>
