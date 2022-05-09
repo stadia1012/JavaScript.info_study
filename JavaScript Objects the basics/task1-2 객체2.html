@@ -63,6 +63,8 @@
             //         return true;
             //     }
             // }
+
+
             function isEmpty(obj) {
                 for (let key in obj) {
                     return false;  // 프로퍼티가 하나라도 있으면 즉시 false를 반환
@@ -74,10 +76,46 @@
             alert( isEmpty(schedule) );
             schedule["8:30"] = "get up";
             alert( isEmpty(schedule) );
-
-            
         }
         
+        //월급 합계 구하기.
+        function exam5() { 
+            let salaries = {
+            John: 100,
+            Ann: 160,
+            Pete: 130,
+            stadia: 250
+            }
+
+            let sum = 0;
+            for (let key in salaries) {
+                sum += salaries[key];
+            }
+            alert(sum);
+        }
+
+        function exam6() {
+            // 함수 호출 전
+            let menu = {
+            width: 200,
+            height: 300,
+            title: "My menu"
+            };
+
+            multiplyNumeric(menu);  // {width: 400, height: 600, title: 'My menu'}
+
+            function multiplyNumeric(obj) {
+                for (let key in obj) {
+                    if (typeof(obj[key]) == 'number') {
+                        obj[key] += obj[key];
+                    } else {
+                        continue;
+                    }
+                }                                                                                         
+            }
+            console.log(menu);
+        }
+
     </script>
 
     <a href="#" onclick="exam1();">#1</a>
@@ -85,6 +123,7 @@
     <a href="#" onclick="exam3();">#3</a>
     <a href="#" onclick="exam4();">#4</a>
     <a href="#" onclick="exam5();">#5</a>
+    <a href="#" onclick="exam6();">#6</a>
 
 </body>
 
