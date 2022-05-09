@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <!--new연산자, 생성자-->
+    <meta charset='utf-8'>
+    <link rel="stylesheet" href="taskCSS_1.css" type="text/css">
+</head>
+
+<body>
+    <script>
+        // 생성자 함수 기본
+        function exam1() {
+            function User(name) {
+                this.name = name;
+                this.isAdmin = false;
+            }
+
+            let user = new User("보라");
+
+            alert(user.name);  // 보라
+            alert(user.isAdmin);  // false
+        }       
+        
+    </script>
+
+    <a href="#" onclick="exam1();">#1</a>
+    <a href="#" onclick="exam2();">#2</a>
+    <a href="#" onclick="exam3();">#3</a>
+    <a href="#" onclick="exam4();">#4</a>
+
+</body>
+</html>
