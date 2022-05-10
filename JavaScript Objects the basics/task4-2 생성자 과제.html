@@ -8,14 +8,82 @@
 
 <body>
     <script>
-        
+        //문제1
+        function exam1() {
+            //a == b 만족시키는 생성자 A, B 만들기
+
+            let C = {           //a, b보다 밑에 있으면 안됨.
+                name: 'stadia',
+            };
+
+            let a = new A;
+            let b = new B;
+            alert( a == b );
+
+            /* 해답 : return으로 외부 객체 C 반환 */
+            function A() {
+                return C;
+            }
+            function B() {
+                return C;
+            }
+        }
+
+        function exam2() {
+            /**
+             * 아래와 같은 세 개의 메서드를 가진 생성자 함수, Calculator를 만들어보세요.
+             * read() – prompt 함수를 이용해 사용자로부터 값 두 개를 받고, 이를 객체 프로퍼티에 저장합니다.
+             * sum() – 프로퍼티에 저장된 값 두 개를 더한 후 반환합니다.
+             * mul() – 프로퍼티에 저장된 값 두 개를 곱한 후 반환합니다.
+             */
+            function Calculator() {
+                this.num1 = 0;
+                this.num2 = 0;
+                this.read = function() {
+                    this.num1 = +prompt('첫번째 숫자를 입력해주세요.', '');
+                    this.num2 = +prompt('두번째 숫자를 입력해주세요.', '');
+                };
+                this.sum = function() {
+                    return (this.num1 + this.num2);
+                };
+                this.mul = function() {
+                    return (this.num1 * this.num2);
+                };
+            }
+            let calculator = new Calculator();
+            calculator.read();
+            alert( `합계는 ${calculator.sum()}` );
+            alert( `곱은 ${calculator.mul()}` );
+        }
+
+        function exam3() {
+            /**
+             * 생성자 함수 Accumulator(startingValue)를 만들어 보세요.
+             * Accumulator(startingValue)를 이용해 만드는 객체는 아래와 같은 요건을 충족해야 합니다.
+             * 프로퍼티 value에 현재 값(current value)을 저장합니다. 최초 호출 시엔 생성자 함수의 인수, startingValue에서 시작값(starting value)을 받아옵니다.
+             * 메서드 read()에선 prompt 함수를 사용해 사용자로부터 숫자를 받아오고, 받은 숫자를 value에 더해줍니다.
+             * 프로퍼티 value엔 startingValue와 사용자가 입력한 모든 값의 총합이 더해져 저장됩니다.
+             */
+
+            let accumulator = new Accumulator(5);  // 최초값: 5
+            accumulator.read(); // 사용자가 입력한 값을 더해줌
+            accumulator.read(); // 사용자가 입력한 값을 더해줌
+            alert(accumulator.value);
+
+            function Accumulator(startingValue) {
+                this.value = startingValue;
+                this.read = function() {
+                    let readValue = +prompt('값 입력 : ', '');  // this.value += +prompt(...); 로도 가능.
+                    this.value += readValue;
+                };
+            }
+        }
 
     </script>
 
     <a href="#" onclick="exam1();">#1</a>
     <a href="#" onclick="exam2();">#2</a>
     <a href="#" onclick="exam3();">#3</a>
-    <a href="#" onclick="exam4();">#4</a>
 
 </body>
 </html>
