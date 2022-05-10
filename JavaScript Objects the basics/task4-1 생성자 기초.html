@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <!--new연산자, 생성자-->
+    <!--생성자 기초-->
     <meta charset='utf-8'>
     <link rel="stylesheet" href="taskCSS_1.css" type="text/css">
 </head>
@@ -43,13 +43,28 @@
         function exam3() {
             function SmallUser() {
                 this.name = "원숭이";
-                return;  // 객체 이외에 무시.
+                return;  // 객체 이외에 무시. 자동으로 this를 반환함.
             }
 
             alert(new SmallUser().name);  // 원숭이 
         }
 
-        
+        // 생성자 내 메소드 사용
+        function exam4() {
+            function User(name) {
+                this.name = name;
+                this.sayHi = function (age) {
+                    alert(`제 이름은 ${this.name}입니다. ${age}살입니다.`);  // this[name]은 undefined.
+                    //alert("제 이름은" + this.name + '입니다.')  // 이것도 가능.
+                };
+            }
+
+            let stadia = new User("스타디아");
+            stadia.sayHi(10);
+        }
+        // 생성자, 객체의 기본 내용 끝.
+        // 결론 : 생성자 함수는 유사한 객체를 여러 개 만들 때 유용.
+
     </script>
 
     <a href="#" onclick="exam1();">#1</a>
