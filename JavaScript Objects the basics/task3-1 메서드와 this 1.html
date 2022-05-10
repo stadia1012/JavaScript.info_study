@@ -26,7 +26,7 @@
         
 
         function exam2() {
-            // 일반 방법
+            /* 일반 방법 */
             user1 = {
                 sayHi: function() {
                     alert("Hello!!");
@@ -34,7 +34,7 @@
             };
             user1.sayHi()  // Hello!!
 
-            // 단축 구문 방법
+            /* 단축 구문 방법 */
             user2 = {
                 sayHi() {
                     alert("Hello~");  // Hello~  // 메서드 이름 같아도 됨.
@@ -43,8 +43,9 @@
             user2.sayHi()
         }
 
-        // (strict mode에서 (메서드가 아닌) 함수 안에서의 this는 undefined. // 엄격모드 아닐땐 같은 이름의 전역 변수)
-
+        // this는 메서드가 포함된 객체의 프로퍼티 활용 가능케 함.
+        // 동일 함수라도 다른 객체에서 호출했다면, this가 참조하는 값 달라짐. (런타임에 this가 결정) -> 다른 언어와의 차이점.
+        // (strict mode에서 (메서드가 아닌) 함수 안에서의 this.xxx는 undefined. // 엄격모드 아닐 땐 같은 이름의 전역 변수)
         
         function exam3() {
             let num = 0;

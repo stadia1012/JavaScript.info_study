@@ -8,13 +8,13 @@
 
 <body>
     <script>
-        /*객체는 참조에 의해 할당되고 복사됨. 변수엔 객체 자체가 아닌 메모리상의 주소(참조)가 저장됨. */
+        /*객체는 참조에 의해 할당되고 복사됨. 단순 복사 시 객체 자체가 아닌 메모리상의 주소(참조)가 저장됨. */
 
         function exam1() {
             let user = {name: 'John'};
             let admin = user;  // 참조값이 복사되고 객체는 복사되지 않는다. 즉, 동일 객체를 참조.
             admin.name = 'Pete';  
-            alert(user.name);  // Pete
+            alert(user.name);  // Pete  (변경된 값이 나옴)
         }
 
         function exam2() {
@@ -31,15 +31,15 @@
         //똑같으면서 독립적인 객체를 만들고 싶다면
         function exam3() {
             let user = {
-            name: "John",
-            age: 30
+                name: "John",
+                age: 30
             };
 
             let clone = {};  // 빈 객체
 
             // 빈 객체에 user 프로퍼티 전부 복사.
             for (let key in user) {
-            clone[key] = user[key];
+                clone[key] = user[key];
             }
 
             clone.name = "Pete";  // clone의 데이터를 변경한다.
@@ -58,7 +58,7 @@
             console.log(user);  // {name: 'admin', canView: true, canEdit: true}
         }
 
-        // 단, 중첩 객체는 복제 불가.  lodash 라이브러리의 _.cloneDeep(obj) 등 사용해야. (깊은 복사)
+        // 단, 중첩 객체는 복사 불가.(깊은 복사 불가 / 같은 객체를 참조로 고유함.)  lodash 라이브러리의 _.cloneDeep(obj) 등 사용해야.
 
     </script>
 

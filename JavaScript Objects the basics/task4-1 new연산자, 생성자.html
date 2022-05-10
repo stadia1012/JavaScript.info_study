@@ -11,15 +11,44 @@
         // 생성자 함수 기본
         function exam1() {
             function User(name) {
+                //this = {};  // 암시적으로 빈 객체 생성.
                 this.name = name;
                 this.isAdmin = false;
+                //return this;  // this 암시적으로 반환
             }
 
             let user = new User("보라");
 
             alert(user.name);  // 보라
             alert(user.isAdmin);  // false
-        }       
+        }
+        // 주석처리한 암시적 코드는 new를 붙여 실행하면 실행됨. 
+
+        /**
+        *  생성자의 return 
+        * 객체를 return 한다면 this 대신 객체가 반환됨.
+        * 원시형을 return 한다면 return문이 무시됨.
+        */
+
+        // 생성자 return 예시
+        function exam2() {
+            function BigUser() {
+                this.name = "원숭이";
+                return { name: "고릴라" };
+            }
+
+            alert(new BigUser().name);  // 고릴라
+        }
+
+        function exam3() {
+            function SmallUser() {
+                this.name = "원숭이";
+                return;  // 객체 이외에 무시.
+            }
+
+            alert(new SmallUser().name);  // 원숭이 
+        }
+
         
     </script>
 
