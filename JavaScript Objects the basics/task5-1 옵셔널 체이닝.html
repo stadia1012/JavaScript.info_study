@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <!--옵셔널 체이닝 '?.'-->
+    <meta charset='utf-8'>
+    <link rel="stylesheet" href="taskCSS_1.css" type="text/css">
+</head>
+
+<body>
+    <script>
+        // 옵셔널 체이닝 '?.'의 사용 목적 : 
+        // 프로퍼티가 없는 중첩 객체를 에러 없이 안전하게 접근 가능
+        // 즉, 존재하지 않는 요소에 접근할 때의 에러 방지.
+
+        // 예시
+        function exam1() {
+            let user = {};
+
+            alert(user.address.street);  // TypeError: Cannot read properties of undefined (reading 'street')
+            alert( user && user.address && user.address.street );  // 
+        }
+
+
+
+
+    </script>
+
+    <a href="#" onclick="exam1();">#1</a>
+    <a href="#" onclick="exam2();">#2</a>
+    <a href="#" onclick="exam3();">#3</a>
+
+</body>
+</html>
