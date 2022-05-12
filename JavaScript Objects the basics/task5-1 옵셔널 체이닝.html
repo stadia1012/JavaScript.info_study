@@ -14,7 +14,7 @@
         // 즉, 존재하지 않는 요소에 접근할 때의 에러 방지.
 
         // 예시
-        let user = {};
+        let user = {name: stadia};
         alert(user.address.street);  // TypeError: Cannot read properties of undefined (reading 'street')
 
         function exam1() {
@@ -26,9 +26,25 @@
 
         // ?.은 앞 평가대상에서만 동작
         function exam2() {
-            alert(user?.address.street)  // TypeError TypeError: Cannot read properties of undefined (reading 'street')
+            let user1 = {
+                address: {
+                    street: 'A street',
+                },
+            };
+            alert(user1.address.street);  // A street
+            alert(user1.name?.lastName);  // undefined
+            alert(user1.address?.newAddress);  // undefined
+            alert(user1?.address.newAddress);  // undefined
+            let user2 = {}; // 주소 정보가 없는 사용자
+
+            alert( user2?.address?.street ); // undefined, 에러가 발생하지 않습니다.
         }
 
+        function exam3() {
+            let user1 = {}; 
+            alert(user1?.address.street);  // Error
+            alert(user1?.address?.street);  // undefined
+        }
 
 
 
