@@ -35,9 +35,8 @@
             alert(user1.name?.lastName);  // undefined
             alert(user1.address?.newAddress);  // undefined
             alert(user1?.address.newAddress);  // undefined
-            let user2 = {}; // 주소 정보가 없는 사용자
-
-            alert( user2?.address?.street ); // undefined, 에러가 발생하지 않습니다.
+            
+            alert(user2?.address)  // Error 선언되지 않은 루트 객체에 사용 불가.
         }
 
         function exam3() {
