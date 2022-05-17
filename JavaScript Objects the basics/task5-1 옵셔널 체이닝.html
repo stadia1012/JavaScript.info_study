@@ -17,12 +17,14 @@
         let user = {name: stadia};
         alert(user.address.street);  // TypeError: Cannot read properties of undefined (reading 'street')
 
+
         function exam1() {
             let user = {address: 2,};
             alert( user && user.address && user.address.street );  // undefined //옵셔널 체이닝 추가 전의 처리 방법
             
             alert(user?.address?.street);  // undefined 
         }
+
 
         // ?.은 앞 평가대상에서만 동작
         function exam2() {
@@ -33,16 +35,76 @@
             };
             alert(user1.address.street);  // A street
             alert(user1.name?.lastName);  // undefined
+            alert(user1?.name.lastName);  // Error  // name이 선언되지 않음.
             alert(user1.address?.newAddress);  // undefined
             alert(user1?.address.newAddress);  // undefined
             
-            alert(user2?.address)  // Error 선언되지 않은 루트 객체에 사용 불가.
+            alert(user2?.address)  // Error 선언되지 않은 루트 객체에 사용 불가. user2는 무조건 선언되어야.
         }
+
 
         function exam3() {
             let user1 = {}; 
-            alert(user1?.address.street);  // Error
+            alert(user1?.address.street);  // Error // address에서 에러 발생. 프로퍼티가 없으므로.
             alert(user1?.address?.street);  // undefined
+        }
+
+
+        // 단락 평가 기능
+        function exam4() {
+            let user = null;
+            let x = 0;
+
+            function sayHi() {
+                x += 2;
+                return x;
+            }
+
+            sayHi(x);
+            alert(x);  // 2
+
+            sayHi(x);
+            alert(x);  // 4
+            user?.sayHi(x);  // user가 null이므로 평가 중단.
+            alert(x);  // 4
+        }
+
+
+        // 함수에서 사용
+        function exam5() {
+            let user1 = {
+                admin() {
+                    alert("관리자 계정입니다.");
+                }
+            }
+            let user2 = {};
+
+            user1.admin?.();  // 관리자 계정입니다.
+            user2.admin?.();  
+        }
+
+
+        // .?[]
+        function exam6() {
+            let user1 = {
+                firstName: "Violet"
+            };
+
+            let user2 = null;  // user2는 권한이 없는 사용자라고 가정해봅시다.
+
+            let key = "firstName";
+
+            alert( user1?.[key] );  // Violet
+            alert( user2?.[key] );  // undefined
+
+            alert( user1?.[key]?.something?.not?.existing);  // undefined
+        }
+
+
+        // 기타 (실행은 불가)
+        function exam7() {
+            delete user?.name;  // user가 존재하면 user.name을 삭제.
+            user?.name = "Violet";  // Error 사용불가.
         }
 
     </script>
@@ -50,6 +112,9 @@
     <a href="#" onclick="exam1();">#1</a>
     <a href="#" onclick="exam2();">#2</a>
     <a href="#" onclick="exam3();">#3</a>
+    <a href="#" onclick="exam4();">#4</a>
+    <a href="#" onclick="exam5();">#5</a>
+    <a href="#" onclick="exam6();">#6</a>
 
 </body>
 </html>
