@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <!--심볼형-->
+    <meta charset='utf-8'>
+    <link rel="stylesheet" href="taskCSS_1.css" type="text/css">
+</head>
+
+<body>
+    <script>
+        /**
+         * 1. 모든 객체는 논리 평가 시 true 반환. 따라서 객체는 숫자형, 문자형으로만 변환됨.
+         * 2. 숫자형으로의 변환은 뺄셈. 등 수학 관련 함수 적용 시 발생.
+         * 3. 문자형 형변환은 alert(obj) 처럼 객체를 출력할 때 발생.
+         */
+
+
+        /* hint(목표 자료형)가 string인 케이스 */
+        function exam1() {
+            // 객체를 출력
+            alert(obj);
+
+            // 객체를 프로퍼티 키로 사용하고 있음
+            anotherObj[obj] = 123;
+        }    
+        
+
+        /* hint가 number인 케이스 */
+        function exam2() {
+            // 명시적 형 변환
+            let num = Number(obj);
+
+            // (이항 덧셈 연산을 제외한) 수학 연산
+            let n = +obj; // 단항 덧셈 연산
+            let delta = date1 - date2;
+
+            // 크고 작음 비교하기
+            let greater = user1 > user2;
+        }
+
+        
+        /* default인 케이스 */
+        function exam3() {
+            // 이항 덧셈 연산자
+            let total = obj1 + obj2;
+
+            // 동등연산자
+            if (user == 1) {}
+        }
+
+        // date를 제외한 모든 내장 객체는 default와 number를 동일하게 처리.
+
+        
+    </script>
+
+    <a href="#" onclick="exam1();">#1</a>
+    <a href="#" onclick="exam2();">#2</a>
+    <a href="#" onclick="exam3();">#3</a>
+    <a href="#" onclick="exam4();">#4</a>
+    <a href="#" onclick="exam5();">#5</a>
+    <a href="#" onclick="exam6();">#6</a>
+
+</body>
+</html>
