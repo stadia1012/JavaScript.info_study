@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <!--심볼형-->
+    <meta charset='utf-8'>
+    <link rel="stylesheet" href="taskCSS_1.css" type="text/css">
+</head>
+
+<body>
+    <script>
+        // 심볼 : 유일무이한 식별자를 만들때 사용. 이름이 같더라도 값이 항상 다름.  // 객체 프로퍼티의 key는 문자형과 심볼형만 가능.
+
+        function exam1() {
+            let id1 = Symbol("id");
+            let id2 = Symbol("id");
+
+            alert(id1 == id2); // false
+        } 
+
+        function exam2() {
+            let id = Symbol("id");
+            let user = {
+                name: "John",
+                age: 30,
+                [id]: 123
+            };
+
+            for (let key in user) alert(user[key]);  // John, 30
+
+            // 심볼로 직접 접근하면 잘 작동.
+            alert( "직접 접근한 값: " + user[id] );  // 123
+        }
+
+        /**
+         * 서드파티 코드에서 가지고 온 객체에 프로퍼티를 추가할 때 사용.
+         * 함부로 새로운 프로퍼티를 추가할 수 없는데, 심볼은 서드파티 코드에서 접근불가.
+         *
+         * 그런데, Object.assign은 키가 심볼인 프로퍼티를 배제하지 않고 객체 내 모든 프로퍼티를 복사.
+         */
+
+        // 전역 심볼
+        // 전역 심볼 레지스트리(global symbol registry) : 이름이 같은 심볼에 접근할 경우 항상 동일한 심볼을 반환.
+        // Symbol.for(key) 사용.
+        let id = Symbol.for("id");  // 심볼이 존재하지 않으면 새로운 심볼을 만듦.
+
+        let idAgain = Symbol.for("id");
+
+        // 두 심볼은 같다.
+        alert( id === idAgain );  // true
+        
+    </script>
+
+    <a href="#" onclick="exam1();">#1</a>
+    <a href="#" onclick="exam2();">#2</a>
+    <a href="#" onclick="exam3();">#3</a>
+    <a href="#" onclick="exam4();">#4</a>
+    <a href="#" onclick="exam5();">#5</a>
+    <a href="#" onclick="exam6();">#6</a>
+
+</body>
+</html>
