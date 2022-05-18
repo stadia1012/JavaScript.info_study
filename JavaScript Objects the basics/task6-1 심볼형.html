@@ -11,41 +11,91 @@
         // 심볼 : 유일무이한 식별자를 만들때 사용. 이름이 같더라도 값이 항상 다름.  // 객체 프로퍼티의 key는 문자형과 심볼형만 가능.
 
         function exam1() {
-            let id1 = Symbol("id");
+            let id1 = Symbol("id");  // 심볼 id1 만들기. "id" -> '심볼 이름', 또는 '설명' -> 어느 것에도 영향을 주지 않는 이름표 역할.
             let id2 = Symbol("id");
 
             alert(id1 == id2); // false
         } 
 
+
+        // 심볼의 형변환
         function exam2() {
+            let id1 = Symbol("id");
+            //alert(id1);  // Error 발생. 심볼은 다른 자료형으로 자동 형변환 되지 않음. (문자형으로 변환 안돼서 alert에서 Error)
+
+            let id2 = Symbol("id");
+            alert(id2.toString());  // Symbol(id)
+            alert(id.description);  // id  // symbol.description를 이용하면 설명만 보여주는 것도 가능.
+        }
+
+        // 숨김 프로퍼티
+        function exam3() {
+            let user = {  // 서드파티 코드에서 가져온 객체
+                name: "John"
+            };
             let id = Symbol("id");
+            user[id] = "symbol test";
+            alert( user[id] );  // 심볼 키를 사용해 데이터 접근 가능.
+        }
+        /** 문자열 "id"가 아닌 Symbol("id")를 사용한 이유?
+         * 서드파티 코드에서 가져온 객체이므로 *함부로 새로운 프로퍼티 추가 불가.
+         * 그러나 심볼은 서드파티에서 접근 불가하기 때문에 서드파티 모르게 프로퍼티 추가
+         * 
+         * 또한, 심볼은 유일성이 보장되므로 여기서 만든 식별자와 제3의 스크립트에서 만든 식별자의 충돌 가능성 없음. (덮어씌어질 가능성 없음)
+         */
+
+
+        // 심볼은 for in 에서 배제됨
+        function exam4() {
+            let id = Symbol("id");
+
             let user = {
                 name: "John",
                 age: 30,
-                [id]: 123
+                [id]: 123   // 객체리터럴 {...}을 사용해 객체를 만든 경우, 대괄호를 사용해 심볼형 키를 만들어야.
             };
 
-            for (let key in user) alert(user[key]);  // John, 30
+            for (let key in user) alert(user[key]);  // John, 30  ->  키가 심볼인 프로퍼티는 배제됨.
 
             // 심볼로 직접 접근하면 잘 작동.
             alert( "직접 접근한 값: " + user[id] );  // 123
         }
+        // Object.keys(user) 에서도 배제됨.
+        // 그런데, Object.assign은 키가 심볼인 프로퍼티를 배제하지 않고 객체 내 모든 프로퍼티를 복사함.
 
-        /**
-         * 서드파티 코드에서 가지고 온 객체에 프로퍼티를 추가할 때 사용.
-         * 함부로 새로운 프로퍼티를 추가할 수 없는데, 심볼은 서드파티 코드에서 접근불가.
-         *
-         * 그런데, Object.assign은 키가 심볼인 프로퍼티를 배제하지 않고 객체 내 모든 프로퍼티를 복사.
-         */
 
-        // 전역 심볼
         // 전역 심볼 레지스트리(global symbol registry) : 이름이 같은 심볼에 접근할 경우 항상 동일한 심볼을 반환.
         // Symbol.for(key) 사용.
-        function exam3() {
-            let id = Symbol.for("id");  // 심볼이 존재하지 않으면 새로운 심볼을 만듦.
+        function exam5() {
+            let id = Symbol.for("id");  // 읽거나, 심볼이 존재하지 않으면 새로운 심볼을 만듦.
             let idAgain = Symbol.for("id");
             
             alert( id === idAgain );  // true  // 두 심볼은 같다.
+        }
+
+        // Symbol.keyFor 메소드 : 전역 심볼 레지스트리에서 심볼의 이름 반환
+        function exam5() {
+            let sym = Symbol.for("name");
+            let sym2 = Symbol.for("id");
+            let sym3 = Symbol("pw");
+            
+            alert( Symbol.keyFor(sym) );  // name
+            alert( Symbol.keyFor(sym2) );  // id
+
+            // 전역 심볼이 아닌 심볼은 undefined 반환
+            alert( Symbol.keyFor(sym3) );  // undefined
+        }
+        
+        
+        // 일반 심볼에서 이름을 얻고싶을 땐 description 사용 (전역 심볼이 아닌 모든 심볼은 description 프로퍼티 존재)
+        function exam6() {
+            let globalSymbol = Symbol.for("name");
+            let localSymbol = Symbol("name");
+
+            alert( Symbol.keyFor(globalSymbol) );  // name, 전역 심볼
+            alert( Symbol.keyFor(localSymbol) );  // undefined, 전역 심볼이 아님
+
+            alert( localSymbol.description );  // name
         }
 
     </script>
@@ -53,6 +103,9 @@
     <a href="#" onclick="exam1();">#1</a>
     <a href="#" onclick="exam2();">#2</a>
     <a href="#" onclick="exam3();">#3</a>
+    <a href="#" onclick="exam4();">#4</a>
+    <a href="#" onclick="exam5();">#5</a>
+    <a href="#" onclick="exam6();">#6</a>
 
 </body>
 </html>
