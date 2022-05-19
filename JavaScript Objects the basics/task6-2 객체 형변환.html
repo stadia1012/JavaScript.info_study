@@ -10,7 +10,7 @@
     <script>
         /**
          * 1. 모든 객체는 논리 평가 시 true 반환. 따라서 객체는 숫자형, 문자형으로만 변환됨.
-         * 2. 숫자형으로의 변환은 뺄셈. 등 수학 관련 함수 적용 시 발생.
+         * 2. 숫자형으로의 변환은 뺄셈 등 수학 관련 함수 적용 시 발생.
          * 3. 문자형 형변환은 alert(obj) 처럼 객체를 출력할 때 발생.
          */
 
@@ -39,29 +39,31 @@
         }
 
         
-        /* default인 케이스 */
+        /* hint가 default인 케이스 */
         function exam3() {
             // 이항 덧셈 연산자
             let total = obj1 + obj2;
 
             // 동등연산자
-            if (user == 1) {}
+            if (user == 1) { /*...*/ }
         }
 
         // date를 제외한 모든 내장 객체는 default와 number를 동일하게 처리.
         // 따라서 숫자형, 문자형만 있다고 보면 됨.
+        // 우리가 만든 객체도 default와 number를 동일하게 처리하면 수월할 것.
 
         
-        // Symbol.toPrimitive : 내장 심볼. 목표로 하는 자료형(hint)을 명명한다.
+        // Symbol.toPrimitive : 내장 심볼. 목표로 하는 자료형(hint)을 명명한다. // 
+        // 객체에 형변환이 요구되면 최우선 호출됨. (그 다음 순위는 아래 서술)
         function exam4() {
             let user = {
                 name: "John",
                 money: 1000,
 
-                [Symbol.toPrimitive](hint) {
+                [Symbol.toPrimitive](hint) {  // hint를 'hint'라고 할게.
                     alert(`hint: ${hint}`);
                     return hint == "string" ? `{name: "${this.name}"}` : this.money;
-                }
+                }   //     hint가                 string 일 경우       // number 또는 default인 경우.
             };
 
             alert(user);  // hint: string -> {name: "John"}
@@ -69,29 +71,104 @@
             alert(user + 500);  // hint: default -> 1500
         }
 
+        // test 1  // 그냥 출력한다면?
         function exam5() {
             let user = {
                 num1: 600,
                 num2: 2000,
             }
-            alert(user + 300);  
+            alert(user + 300);  // [object Object]300
         }
 
+        // test 2  // hint를 다른 이름으로
         function exam6() {
             let user = {
                 name: "John",
                 money: 1000,
 
-                [Symbol.toPrimitive](hint) {
-                    alert(`hint: ${hint}`);
-                    //return hint == "string" ? `{name: "${this.name}"}` : this.money;
+                [Symbol.toPrimitive](abc) {
+                    alert(`hint: ${abc}`);
+                    return abc == "string" ? `{name: "${this.name}"}` : this.money;
                 }
             };
 
             alert(user);  // hint: string -> {name: "John"}
-            alert(+user);  // hint: number -> 1000
+            alert(+user);  // hint: number -> 1000 
             alert(user + 500);  // hint: default -> 1500
         }
+                       /* 결과는 동일함 */
+
+        /**
+         * 객체에 Symbol.toPrimitive 없다면,
+         * (1) hint가 string인 경우 toString -> valueOf 순위로 호출  (toString 없으면 valueOf 호출)
+         * (2) 그 외(number, default)의 경우 valueOf -> toSting 순으로 호출.
+         *
+         * toString : 문자열 "[object Object]"를 반환  // 이 이유로 alert을 객체에 넘기면 [object Object] 출력.
+         * valueOf : 객체 자신을 반환
+         */
+
+        // 검증
+        function exam7() {
+            let user = {name: "John"};
+            alert(user);  // [object Object]
+            alert(user.valueOf() === user);  // true
+        }
+
+        function exam8() {
+            let user = {
+                name: "John",
+                money: 1000,
+
+                // hint가 string인 경우
+                toString() {
+                    return `{name: "${this.name}"}`;
+                },
+
+                // hint가 number나 default인 경우
+                valueOf() {
+                    return this.money;
+                },
+            };
+
+            alert(user);  // toString -> {name: "John"}
+            alert(+user);  // valueOf -> 1000
+            alert(user + 500);  // valueOf -> 1500
+             /* 처음 exam4와 결과가 같음 */
+             
+             // 간혹 모든 형 변환을 한 곳에서 처리해야 하는 경우도 생기는데, 이럴 땐 toString만 구현할 것.
+             // Symbol.toPrimitive와 valueOf가 없으면, toString이 모든 형 변환을 처리함.
+
+             // toSring, valueOf가 객체를 반환해도 에러 발생 안함. 단, 반환 값이 완전 무시됨.
+             // 단, Symbol.toPrimitive는 반드시 원시자료를 반환해야. 아닐 경우 에러 발생.
+        }
+
+        function exam9() {
+            let objNumber = {
+            // 다른 메서드가 없으면 toString에서 모든 형 변환을 처리한다. ***실무에선 이런 경우가 많음.
+            toString() {
+               return "2";
+                }
+            };
+            alert(objNumber * 2);  // 4, 먼저는 string으로 형변환 -> ("2" * 2)에서 숫자로 다시 형변환
+
+           let objString = {
+                toString() {
+                    return "2";
+                }
+            };
+            alert(objString + 2);  // 22, string으로 형변환. "2" + 2 = "22"
+        }
+
+        /**
+         *  객체-원시형 변환엔 다음 알고리즘이 적용됩니다.
+         * 
+         * (1) 객체에 obj[Symbol.toPrimitive](hint)메서드가 있는지 찾고, 있다면 호출
+         * (2) 1에 해당하지 않고 hint가 string이라면,
+        *      obj.toString()이나 obj.valueOf()를 호출
+         * (3) 1과 2에 해당하지 않고, hint가 number나 default라면
+         *     obj.valueOf()나 obj.toString()을 호출
+         */
+
     </script>
 
     <a href="#" onclick="exam1();">#1</a>
@@ -100,6 +177,9 @@
     <a href="#" onclick="exam4();">#4</a>
     <a href="#" onclick="exam5();">#5</a>
     <a href="#" onclick="exam6();">#6</a>
+    <a href="#" onclick="exam7();">#7</a>
+    <a href="#" onclick="exam8();">#8</a>
+    <a href="#" onclick="exam9();">#9</a>
 
 </body>
 </html>
