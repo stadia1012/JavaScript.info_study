@@ -19,16 +19,16 @@
 
         function exam2() {
             let a = {};
-            let b = a; // 참조 복사
-            alert( a == b ); // true
-            alert( a === b ); // true
+            let b = a;  // 참조 복사
+            alert( a == b );  // true
+            alert( a === b );  // true
 
             let aa = {};
-            let bb = {};  // 독립된 객체.
+            let bb = {};  // 독립된 객체
             alert( aa == bb );  // false
         }
 
-        //똑같으면서 독립적인 객체를 만들고 싶다면
+        // 똑같으면서 독립적인 객체를 만들고 싶다면
         function exam3() {
             let user = {
                 name: "John",
@@ -46,7 +46,7 @@
             alert( user.name );  // John
         }
 
-        //assign 메서드 사용 (얕은 복사)
+        // assign 메서드 사용 (얕은 복사)
         function exam4() {
             let user = {name: 'John'};
 

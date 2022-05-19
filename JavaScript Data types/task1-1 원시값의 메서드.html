@@ -1,13 +1,69 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <!--객체 형변환-->
+    <!--원시값의 메서드-->
     <meta charset='utf-8'>
     <link rel="stylesheet" href="taskCSS_1.css" type="text/css">
 </head>
 
 <body>
     <script>
+        /** 
+         * 원시형의 종류는 string, number, bigint, boolean, symbol, null, undefined형으로 총 일곱 가지.
+         * 원시형은 값이며, 객체가 아님. 그러나 원시값의 메서드나 프로퍼티에 접근하려 하면 "원시 래퍼객체(object wrapper)"가 만들어짐
+         * null과 undefined는 특수자료형으로 래퍼 객체 없음. 두 자료형에 속한 값의 프로퍼티에 접근하면 에러 발생.
+         */
+
+
+        // 래퍼 객체의 예시 (맛보기)
+        function exam1() {
+            // 예시 1
+            let str = "Hello";
+            alert( str.toUpperCase() );  // HELLO   // 대문자로 변환
+            // 예시 2
+            let n = 1.23456;
+            alert( n.toFixed(2) );  // 1.23    // 원하는 소수점 아래 숫자에서 반올림
+        }
+
+
+        // String / Number / Boolean를 생성자로 쓰지 말 것. -> 혼동 초래
+        function exam2() {
+            // 상황 1
+            alert( typeof 0 );  // number
+            alert( typeof new Number(0) );  // object  // 객체 취급
+        
+            // 상황 2
+            let zero = new Number(0);
+            if (zero) {  // 변수 zero는 객체이므로, 조건문이 참이 된다.
+                alert( "객체는 Boolean 값이 true이기 때문이다." );
+            }
+        }
+
+
+        // 단, new를 붙이지 않고 String / Number / Boolean을 사용하는 건 가능.
+        function exam3() {
+            alert( typeof Number("123") );  // number
+
+            let zero = Number("0");
+            if (zero) {
+                alert( "실행되지 않음" );
+            } else {
+                alert( "0(false)으로 받기 때문이다.");
+            }
+        }
+
+
+        // 원시값은 추가 데이터 저장 불가
+        function exam4() {
+            let str = "Hello";
+            str.test = 5;  // undefined
+            alert(str.test);
+        }
+        /**
+         * 해설 : str의 프로퍼티에 접근하려 하면 래퍼 객체 생성됨.
+         * 엄격모드에선 래퍼 객체 수정 시도 시 에러 발생.
+         * 비엄격모드에선 프로퍼티 test가 추가되지만 래퍼 객체는 바로 삭제되어 alert에선 찾을 수 없음.
+         */
         
     </script>
 
@@ -15,11 +71,6 @@
     <a href="#" onclick="exam2();">#2</a>
     <a href="#" onclick="exam3();">#3</a>
     <a href="#" onclick="exam4();">#4</a>
-    <a href="#" onclick="exam5();">#5</a>
-    <a href="#" onclick="exam6();">#6</a>
-    <a href="#" onclick="exam7();">#7</a>
-    <a href="#" onclick="exam8();">#8</a>
-    <a href="#" onclick="exam9();">#9</a>
 
 </body>
 </html>
