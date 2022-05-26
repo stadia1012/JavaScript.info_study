@@ -9,7 +9,7 @@
 <body>
     <script>
         function exam1() {
-            alert(1e3);  // 1000
+            alert(1e3);  // 1 * 10^3 = 1000
             
             let num1 = 1.23e-5;  // 1.23 / 10^5
             alert(num1);  // 0.0000123  
@@ -30,6 +30,7 @@
         }
 
         // num.toString(base)  : base진법으로 num을 표현 후 문자형으로 반환
+        // base의 default는 10, 최대는 36(알파벳 전체 사용)
         function exam3() {
             let num = 255;
 
@@ -38,7 +39,7 @@
 
             alert( 36912..toString(36) );  // shc
             alert( (36912).toString(36) )  // shc
-            // 변수가 아닌 숫자로 메서드를 직접 호출하고 싶을 땐 '..'으로 두 개 쓰기 
+            // 변수가 아닌 숫자로 메서드를 직접 호출하고 싶을 땐 '..'으로 두 개 쓰기 // 괄호도 가능
         }
 
         /**
@@ -47,12 +48,45 @@
          * Math.round : 소수점 첫째 자리에서 반올림
          * Math.trunc : 소수부 무시 (IE에서 미지원)
          */
-        
-        // 
+
+        // to.Fixed(n)는 round와 유사. 단 문자열 반환하고 n이 소수부 길이보다 크면 0이 추가됨.
+
         function exam4() {
-            //...
-            
+            let num = 12.36;
+            alert( num.toFixed(1) );  // "12.4"
+            alert( num.toFixed(5) );  // "12.36000"
+            alert( typeof(+num.toFixed(5)) );  // number
         }
+
+
+               /* --부정확한 계산-- */
+
+        // 숫자는 내부적으로 64비트 형식 IEEE-754으로 표현됨. 
+        // 2비트는 숫자 저장에 사용. 11비트는 소수점 위치를 (정수는 0비트), 1비트는 부호를 저장하는데 사용됨.
+        // 64비트 공간을 넘치는 큰 숫자는 Infinity로 처리됨
+        
+        function exam5() {
+            alert(1e500)  // Infinity
+        }
+
+        // 2진법의 무한소수 문제 -> PHP, Java, C, Perl, Ruby에서도 발생
+        function exam6() {
+            alert(0.1 + 0.2 == 0.3);  // false
+            alert(0.1 + 0.2);  // 0.30000000000000004
+
+            alert( 0.1.toFixed(20) );  // 0.10000000000000000555
+            // IEEE-754에서는 오류 방지를 위해 반올림해서 표현되지만 위 방법으로 오류 확인 가능        
+        }
+
+        // 해결방법 -> toFixed(n) 메서드가 가장 신뢰할만 함
+        function exam7() {
+            let sum = 0.1 + 0.2;
+            alert( sum.toFixed(2) );  // 0.30 
+            alert( +sum.toFixed(2) );  // 0.3 (숫자형 변환)
+        }
+        /*소수를 방지하는 완벽한 방법은 없다. 필요할 때마다 '꼬리'를 잘라 어림수를 만드는 방법뿐*/
+
+        
 
 
     </script>
@@ -61,6 +95,12 @@
     <a href="#" onclick="exam2();">#2</a>
     <a href="#" onclick="exam3();">#3</a>
     <a href="#" onclick="exam4();">#4</a>
+    <a href="#" onclick="exam5();">#5</a>
+    <a href="#" onclick="exam6();">#6</a>
+    <a href="#" onclick="exam7();">#7</a>
+    <a href="#" onclick="exam8();">#8</a>
+    <a href="#" onclick="exam9();">#9</a>
+    <a href="#" onclick="exam10();">#10</a>
  
 </body>
 </html>
