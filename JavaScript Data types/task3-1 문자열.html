@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <!--문자열-->
+    <meta charset='utf-8'>
+    <link rel="stylesheet" href="taskCSS_1.css" type="text/css">
+</head>
+
+<body>
+    <script>
+        // 백틱은 문자열을 여러줄에 걸쳐서 작성 가능. 작은따옴표, 큰따옴표는 에러 발생.
+        function exam1() {
+            let guestList = `손님:
+            * John
+            * Pete
+            * Mary
+            `;
+            alert(guestList);
+        }
+
+        function exam2() {
+            let guestList = "손님:\n * John\n * Pete\n * Mary";  // 줄 바뀌어 실행됨
+            alert(guestList);
+            alert("\\");  // "\" 역슬래시 표현법 
+        }
+
+        /* 문자형의 메소드, 프로퍼티 */
+        // .length : 길이값 반환. 메소드가 아닌 프로퍼티로 .length()가 아닌 .length 인 것 주의
+        function exam3() {
+            alert( `My\n`.length );  // 3  -> \n은 하나의 특수문자 취급
+        }
+
+        // 특정 위치인 n번째 글자에 접근 [n] 또는 str.chrAt(n)
+        function exam4() {
+            let str = 'Hello';
+            alert( str[0] );  // H 
+            alert( str.charAt(0) );  // H
+
+            // 마지막 글자
+            alert( str[str.length - 1] );  // o
+
+            // 접근 불가할 때 차이
+            alert( str[1000] );  // undefined
+            alert( str.charAt(1000) );  // ''
+        }
+
+        // for of 
+        function exam5() {
+            for (let char of "Hello") {
+                alert(char);  //  H, e, l, l, o
+            }
+        }
+
+        // 특정 문자열만 교체는 불가능
+        function exam6() {
+            let str = 'Hi';
+            str[0] = 'h';  // Error
+            alert( str[0] );  // H
+            alert(str);  // Hi
+        }
+
+    </script>
+
+    <a href="#" onclick="exam1();">#1</a>
+    <a href="#" onclick="exam2();">#2</a>
+    <a href="#" onclick="exam3();">#3</a>
+    <a href="#" onclick="exam4();">#4</a>
+    <a href="#" onclick="exam5();">#5</a>
+    <a href="#" onclick="exam6();">#6</a>
+    <a href="#" onclick="exam6();">#7</a>
+    <a href="#" onclick="exam6();">#8</a>
+ 
+</body>
+</html>
