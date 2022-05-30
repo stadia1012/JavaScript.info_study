@@ -15,17 +15,16 @@
             alert(num1 + num2);
         }
 
-
         /** 
          * 숫자를 입력할 때까지 반복하기
          * 사용자가 유효한 숫자형 값을 입력할 때까지 계속 입력받는 함수 readNumber 를 만들어보세요.
          * 반환되는 값은 꼭 숫자형 값이어야 합니다.
          * 사용자가 아무 입력도 하지 않거나 '취소’를 누르면 입력받기를 멈추고 null을 반환하세요.
          */
-        function exam2() {
+        function exam2_1() {
             while (1) {
                 let num = prompt("숫자를 입력해주세요. : ", "0");
-                if ( num === " " && num === null) {
+                if ( num === '' || num === null) {
                     alert("null");
                     break;
                 } else if (isNaN(num)) {
@@ -36,14 +35,108 @@
                 }
             }
         }
+
+        // 해답
+        function exam2_2() {
+            function readNumber() {
+                let num;
+                do {
+                    num = prompt("Enter a number please?", 0);
+                } while ( !isFinite(num) );
+                if (num === null || num === '') return null;
+                return +num;
+            }
+                alert(`Read: ${readNumber()}`);
+        }
+
+
+        // 아래 식이 무한 반복되는 이유?
+        function exam3() {
+            let i = 0;
+            while (i != 10) {
+                i += 0.2;
+            }
+            alert(i);
+        }
+        //  => i는 절대 10과 같아질 수 없다.
+
+        // 해결방안
+        function exam4() {
+            let i = 0;
+            while (i != 100) {
+                i += 2;
+            }
+            alert(i);
+        }
+
+
+        // min-max 사이의 랜덤한 수를 생성하는 random(min, max) 함수 만들기
+        // 예 :  alert( random(1,5) ); -> 4.3435234525
+        function exam5() {
+            function random(min, max) {
+                return min + Math.random() * (max - min);
+            }
+            alert( random(1,5) );  // 1.9278294556948676
+            alert( random(7,13) );  // 11.129804331658068
+        }
+
+
+        // 랜덤 정수 생성하는 randomInteger(min, max) 만들기
+        
+        // 오답(1) exam5의 결과에서 소수점 반올림
+        function exam6() {  
+            function randomInteger(min, max) {
+                let rand = min + Math.random() * (max - min);
+                return Math.round(rand);
+            }
+            alert( randomInteger(1, 3) );
+        }
+        
+        /**
+         * values from 1    ... to 1.4999999999  become 1
+         * values from 1.5  ... to 2.4999999999  become 2
+         * values from 2.5  ... to 2.9999999999  become 3
+         *  -> 2가 나올 확률이 다른 것보다 2배 많음.
+         */
+
+
+        // 정답(1) 
+        function exam7() {
+            function randomInteger(min, max) {
+                let rand = min - 0.5 + Math.random() * (max - min + 1);
+                return Math.round(rand);
+            }
+            alert( randomInteger(1, 3) );
+        }
+
+        // 정답(2)
+        function exam8() {
+            function randomInteger(min, max) {
+                let rand = min + Math.random() * (max + 1 - min);
+                return Math.floor(rand);
+            }
+            alert( randomInteger(1, 3) );
+        }
+
+
+
+
+
+
+
+
+
     </script>
 
     <a href="#" onclick="exam1();">#1</a>
-    <a href="#" onclick="exam2();">#2</a>
+    <a href="#" onclick="exam2();">#2_1</a>
+    <a href="#" onclick="exam2();">#2_2</a>
     <a href="#" onclick="exam3();">#3</a>
     <a href="#" onclick="exam4();">#4</a>
     <a href="#" onclick="exam5();">#5</a>
     <a href="#" onclick="exam6();">#6</a>
+    <a href="#" onclick="exam6();">#7</a>
+    <a href="#" onclick="exam6();">#8</a>
  
 </body>
 </html>
