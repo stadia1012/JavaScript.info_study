@@ -1,120 +1,53 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <!--문자열-->
+    <!--문자열-2-->
     <meta charset='utf-8'>
     <link rel="stylesheet" href="taskCSS_1.css" type="text/css">
 </head>
 
 <body>
     <script>
-        // 백틱은 문자열을 여러줄에 걸쳐서 작성 가능. 작은따옴표, 큰따옴표는 에러 발생.
+    /**
+     * 부분 문자열 추출하기
+     * 1. substring  2. substr  3. slice
+     */
+
+        // str.slice(start [, end])  -> start부터 end까지 (end 미포함)
         function exam1() {
-            let guestList = `손님:
-            * John
-            * Pete
-            * Mary
-            `;
-            alert(guestList);
+            let str = "stadia's JavaScript Study"
+            alert( str.slice(0, 6) );  // stadia
+            alert( str.slice(0, 1) );  // s
+            alert( str.slice(9) );  // JavaScript Study  -> 2nd 인수 생략하면 끝까지 자름
+
+            alert( str.slice(-16, -6) )  // JavaScript  -> 음수는 뒤에서부터 카운팅
         }
 
+
+        // str.substring(start [, end]) : slice와 유사하지만 start가 end보다 커도 됨.
+        // 음수 허용 안함. 0으로 처리.
         function exam2() {
-            let guestList = "손님:\n * John\n * Pete\n * Mary";  // 줄 바뀌어 실행됨
-            alert(guestList);
-            alert("\\");  // "\" 역슬래시 표현법 
+            let str = "stringify";
+
+            alert( str.substring(2, 6) );  // ring
+            alert( str.substring(6, 2) );  // ring
         }
 
-        /* 문자형의 메소드, 프로퍼티 */
-        // .length : 길이값 반환. 메소드가 아닌 프로퍼티로 .length()가 아닌 .length 인 것 주의
+
+        // str.substr(start [, length]) : start부터 시작해 length개의 글자 반환.
         function exam3() {
-            alert( `My\n`.length );  // 3  -> \n은 하나의 특수문자 취급
+            let str1 = "stringify";
+            alert( str.substr(2, 4) );  // ring
+
+            let str2 = "stringify"
         }
 
-        // 특정 위치인 n번째 글자에 접근 [n] 또는 str.chrAt(n)
-        function exam4() {
-            let str = 'Hello';
-            alert( str[0] );  // H 
-            alert( str.charAt(0) );  // H
 
-            // 마지막 글자
-            alert( str[str.length - 1] );  // o
 
-            // 접근 불가할 때 차이
-            alert( str[1000] );  // undefined
-            alert( str.charAt(1000) );  // ''
-        }
-
-        // for of 
-        function exam5() {
-            for (let char of "Hello") {
-                alert(char);  //  H, e, l, l, o
-            }
-        }
-
-        // 특정 문자열만 교체는 불가능
-        function exam6() {
-            let str = 'Hi';
-            str[0] = 'h';  // 변화x
-            alert( str[0] );  // H
-            alert(str);  // Hi
-        }
-        
-        // 대소문자 변경
-        function exam7() {
-            alert( 'Interface'.toUpperCase() );  // INTERFACE
-            alert( 'Interface'.toLowerCase() );  // interface
-
-            alert( 'Interface'[0].toLowerCase() );  // i
-        }
-
-        // 부분 문자열 찾기  str.indexOf(substr, pos) 메서드
-        // 없을 경우 -1을 반환함
-        function exam8() {
-            let str = 'Javascript as known as JS';
-            alert( str.indexOf('Javascript') );  // 0
-            alert( str.indexOf('javascript') );  // -1  대소문자 구분함
-            alert( str.indexOf('vas') );  // 2
-
-            if (str.indexOf("Java") != -1) {
-                alert("찾았다!");
-            }
-        }
         
 
-        // str.indexOf(substr, pos)의 두번째 인수 pos : 해당 위치부터 찾기 시작.
-        function exam9() {
-            let str1 = 'Javascript as known as JS'; 
-            alert( str1.indexOf('as') );  // 3
-            alert( str1.indexOf('as', 4) );  // 11
 
 
-        // NOT 비트 연산자 "~" : 32비트 정수일 때, ~n은 -(n+1)이 됨.  ->  0이 되는 경우는 n == -1일 때가 유일.
-        // 이것을 이용한 문자포함여부 찾기
-            let str2 = "Widget";
-
-            if (~str2.indexOf("Widget")) {  // 없을 경우 0 (false). 그 외엔 true.
-                alert( '찾았다!' );  
-                // -> 언어 특유의 기능을 사용해 직관적이지 않은 코드 작성은 비추.
-            }
-        }   
-        // + str.lastIndexOf(substr, pos)는 문자열 끝에서부터 부분 문자열을 찾는 것만 다르다.
-
-
-
-        // str.includes(substr, pos) 위치 정보 대신 포함여부만 반환함  -> true, false
-        function exam10() {
-            let str = 'Javascript as known as JS';
-            alert( str.includes('known') );  // true
-            alert( str.includes('Python') );  // false
-            alert( str.includes('Java', 15) );  // false
-        }
-
-        // str.startWith(), str.endsWith() : 특정 문자열로 시작하는지, 끝나는지 여부 확인
-        function exam11() {
-            alert( "JavaScript Info".startsWith('Jav') );  // true
-            alert( "JavaScript Info".endsWith('fo') );  // true
-        }
- 
     </script>
 
     <a href="#" onclick="exam1();">#1</a>
