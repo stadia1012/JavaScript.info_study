@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <!--문자열 과제-->
+    <meta charset='utf-8'>
+    <link rel="stylesheet" href="taskCSS_1.css" type="text/css">
+</head>
+
+<body>
+    <script>
+        // 과제1 - 첫 글자를 대문자로 변경 :
+        //   str의 첫글자를 대문자로 변환하는 함수, ucFirst(str) 만들기.
+        
+        // 처음 제출한 답 :
+        function exam1() {
+            function ucFirst(str) {
+                str = str[0].toUpperCase() + str.slice(1);
+                return str;
+            }
+
+            alert( ucFirst('john') );  // John
+            alert( ucFirst('abcd') );  // Abcd
+        }
+        // 문제점 : str이 빈 문자열인 경우 str[0] -> undefined, toUpperCase()에서 에러 발생
+        // 해결 : 1. str.charAt(0) 사용 -> 빈 문자열이더라도 항상 반환  /  2. 빈 문자열인지 확인하는 코드 작성
+        
+
+        // 2번 방법
+        function exam2() {
+            function ucFirst(str) {
+                if (!str) return str;
+
+                return str[0].toUpperCase() + str.slice(1);
+            }
+            alert( ucFirst("john") );  // John
+        }
+        
+
+    </script>
+
+    <a href="#" onclick="exam1();">#1</a>
+    <a href="#" onclick="exam2();">#2</a>
+    <a href="#" onclick="exam3();">#3</a>
+    <a href="#" onclick="exam4();">#4</a>
+    <a href="#" onclick="exam5();">#5</a>
+    <a href="#" onclick="exam6();">#6</a>
+    <a href="#" onclick="exam7();">#7</a>
+    <a href="#" onclick="exam8();">#8</a>
+    <a href="#" onclick="exam9();">#9</a>
+    <a href="#" onclick="exam10();">#10</a>
+ 
+</body>
+</html>
