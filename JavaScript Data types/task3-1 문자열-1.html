@@ -92,9 +92,9 @@
         // 이것을 이용한 문자포함여부 찾기
             let str2 = "Widget";
 
-            if (~str2.indexOf("Widget")) {  // 없을 경우 0 (false). 그 외엔 true.
+            if (~str2.indexOf("Widget")) {  // 없을 경우 0 (false). 그 외 정수는 true.
                 alert( '찾았다!' );  
-                // -> 언어 특유의 기능을 사용해 직관적이지 않은 코드 작성은 비추.
+                // -> 언어 특유의 특징을 사용한 직관적이지 않은 코드 작성은 비추.
             }
         }   
         // + str.lastIndexOf(substr, pos)는 문자열 끝에서부터 부분 문자열을 찾는 것만 다르다.

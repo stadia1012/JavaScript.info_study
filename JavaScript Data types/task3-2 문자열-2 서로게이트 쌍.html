@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <!--문자열-2 서로게이트 쌍-->
+    <meta charset='utf-8'>
+    <link rel="stylesheet" href="taskCSS_1.css" type="text/css">
+</head>
+
+<body>
+    <script>
+    /**
+     * 부분 문자열 추출하기
+     * 1. slice   2. substring   3. substr
+     */
+
+        // str.slice(start [, end])  -> start부터 end까지 (end 미포함)
+        function exam1() {
+            let str = "stadia's JavaScript Study"
+            alert( str.slice(0, 6) );  // stadia
+            alert( str.slice(0, 1) );  // s
+            alert( str.slice(9) );  // JavaScript Study  -> 2nd 인수 생략하면 끝까지 자름
+
+            alert( str.slice(-16, -6) )  // JavaScript  -> 음수는 뒤에서부터 카운팅
+        }
+
+
+        // str.substring(start [, end]) : slice와 유사하지만 start가 end보다 커도 됨.
+        // 음수 허용 안함. 0으로 처리.
+        function exam2() {
+            let str = "stringify";
+
+            alert( str.substring(2, 6) );  // ring
+            alert( str.substring(6, 2) );  // ring
+        }
+
+
+        // str.substr(start [, length]) : start부터 시작해 length개의 글자 반환.
+        function exam3() {
+            let str = "stringify";
+            alert( str.substr(2, 4) );  // ring
+            
+            // 음수이면 뒤에서부터 셈
+            alert( str.substr(-4, 2) );  // gi
+            alert( str.substr(-4, 3) );  // gif
+        }
+
+        // 어떤 걸 사용해야하나?  ->  JavaScript.info는 slice 추천.
+        // 음수도 허용한다는 점에서 유연. 명세서에선 substr은 부록에 정의되어 있음.
+
+
+        /*    문자열 비교    */
+        function exam4() {
+            alert( 'Österreich' > 'Zealand' );  // true 
+            alert( 'a' > 'Z' );  // true
+        // 직관과 다른 결과들
+        
+        // .codePointAt(pos)  -> pos에 위치한 글자의 코드를 반환.
+            alert( 'z'.codePointAt(0) );  // 122
+            alert( 'Z'.codePointAt(0) );  // 90
+
+        // String.fromCodePoint(code)  -> code에 대응하는 글자 반환.
+            alert( String.fromCodePoint(90) );  // Z
+            alert( '\u005a');  // Z
+        }
+        // String.fromCharCode와 str.charCodeAt도 똑같이 동작하지만 서로게이트 쌍 처리 불가.
+
+
+        function exam5() {
+            let str = ''
+
+            for (let i = 65; i <= 220; i++) {
+                str += String.fromCodePoint(i);
+            }
+            alert( str );
+            // ABCDEFGHIJKLMNOPQRSTUVWXYZ[\]^_`abcdefghijklmnopqrstuvwxyz{|}~
+            // ¡¢£¤¥¦§¨©ª«¬­®¯°±²³´µ¶·¸¹º»¼½¾¿ÀÁÂÃÄÅÆÇÈÉÊËÌÍÎÏÐÑÒÓÔÕÖ×ØÙÚÛÜ
+            // 대문자 < 소문자 < 특수문자 < 발음기호
+        }
+
+
+        // str.localeCompare(str2)를 호출하면 ECMA-402에서 정의한 규칙에 따라
+        // str을 str2와 비교하는 정수가 반환됨 (str이 작으면 음수, 크면 양수, 같으면 0 반환)
+            function exam6() {
+                alert( 'Österreich'.localeCompare('Zealand') );  // -1
+            }
+
+
+
+        /** 서로게이트 쌍 (Surrogate Pair) :
+         *  자주 사용되는 글자들은 2바이트 코드를 갖고있지만, 2바이트는 2의 16승(65,536)개의 조합만 가능.
+         *  사용빈도 낮은 기호는 글자들의 쌍을 사용해 인코딩함. -> 길이 2로 취급
+         */
+
+        function exam7() {
+            alert( '𝒳'.length );  // 2  그리스 문자 카이
+            alert( '😂'.length );  // 2  웃으면서 우는 이모티콘
+            alert( '𩷶'.length );  // 2  사용빈도 낮은 한자
+        }
+
+        function exam8() {
+            alert( '𝒳'[0] );  // �
+            alert( '𝒳'[1] );  // �  
+            alert( '😂'[1] );  // �  서로게이트 일부만 출력되는 것.
+        }
+
+        function exam9() {
+            alert( 'S\u0307' );  // Ṡ
+            alert( 'A\u0307' );  // Ȧ
+            // \u0323은 '윗 점' 유니코드 문자
+
+            alert( 'S\u0307\u0323');  // Ṩ  \u0307 (아랫 점)과 동시 사용도 가능
+        }
+
+        // str.normalize() : 유니코드 정규화
+        function exam10() {
+            // 문제 발생 -> 눈으로는 같은 글자지만 조합이 다름
+            let s1 = 'S\u0323\u0307';
+            let s2 = 'S\u0307\u0323';
+
+            alert( `s1: ${s1} / s2: ${s2}` );  // s1: Ṩ / s2: Ṩ
+            alert( s1 == s2 );  // false
+
+
+            // 해결
+            alert( "S\u0307\u0323".normalize() == "S\u0323\u0307".normalize() );  // true
+
+            alert( "S\u0307\u0323".normalize().length );  // 1
+            alert( "S\u0307\u0323".normalize() == "\u1e68" );  // true
+            alert( "S\u0307\u0323".normalize().codePointAt(0) );  // 7784
+            alert( "S\u0307\u0323".normalize().codePointAt(0).toString(16) );  // 1e68
+        }
+
+    </script>
+
+    <a href="#" onclick="exam1();">#1</a>
+    <a href="#" onclick="exam2();">#2</a>
+    <a href="#" onclick="exam3();">#3</a>
+    <a href="#" onclick="exam4();">#4</a>
+    <a href="#" onclick="exam5();">#5</a>
+    <a href="#" onclick="exam6();">#6</a>
+    <a href="#" onclick="exam7();">#7</a>
+    <a href="#" onclick="exam8();">#8</a>
+    <a href="#" onclick="exam9();">#9</a>
+    <a href="#" onclick="exam10();">#10</a>
+ 
+</body>
+</html>
