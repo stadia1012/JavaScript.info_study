@@ -11,7 +11,7 @@
         // 과제1 - 첫 글자를 대문자로 변경 :
         //   str의 첫글자를 대문자로 변환하는 함수, ucFirst(str) 만들기.
         
-        // 처음 제출한 답 :
+        // 처음 작성한 답 :
         function exam1() {
             function ucFirst(str) {
                 str = str[0].toUpperCase() + str.slice(1);
@@ -21,7 +21,7 @@
             alert( ucFirst('john') );  // John
             alert( ucFirst('abcd') );  // Abcd
         }
-        // 문제점 : str이 빈 문자열인 경우 str[0] -> undefined, toUpperCase()에서 에러 발생
+        // 문제점 : str이 빈 문자열인 경우 str[0] -> undefined 이므로 toUpperCase()에서 에러 발생
         // 해결 : 1. str.charAt(0) 사용 -> 빈 문자열이더라도 항상 반환  /  2. 빈 문자열인지 확인하는 코드 작성
         
 
@@ -33,7 +33,55 @@
                 return str[0].toUpperCase() + str.slice(1);
             }
             alert( ucFirst("john") );  // John
-        } 
+            alert( ucFirst(prompt('문자 입력 : ', '')) );
+        }
+
+        // 스팸 문자열 걸러내기
+        // 'stadia', 'xxx'가 들어간 문장일 경우 true 반환 *대소문자 구분 없이
+        function exam3() {
+            function checkSpam(str) {
+                let lowerStr = str.toLowerCase();  // 대소문자 관계없이 검사하기 위해 모두 소문자로
+
+                return lowerStr.includes('stadia') || lowerStr.includes('xxx');
+            }
+
+            alert( checkSpam(`stadia's test`) );
+            alert( checkSpam('xxyy') );
+        }
+
+
+        /**
+         * 문자열 줄이기
+         * 함수 truncate(str, maxlength)를 생성
+         * str의 길이를 확인하고, 최대 길이 maxlength를 초과하는 경우 str의 끝을 생략 부호 ("…")로 대체
+         * 새로 만든 문자열의 길이는 maxlength가 되어야 한다. 
+         */
+        function exam4() {
+            function truncate(str, maxlength) {
+                if (str.length > maxlength) {
+                    str = str.slice(0, maxlength-3) + '...';
+                    return str;
+                }
+                return str;
+            }
+
+            alert( truncate('testmessage:test12341234', 10) );  // testmes...
+            alert( truncate('0123456789', 7) );  // 0123...
+            alert( truncate('0123456', 7) );  // 0123456
+            let str1 = '01234567890'  
+            alert( truncate(str1, 5) );  // 01...
+            alert(str1);  // 01234567890  -> 함수 변경된 변수는 함수 밖에서 반영 안됨
+        }
+
+
+ 
+        // 통화에서 숫자만 추출하기 ex) $120 -> 120
+        function exam5() {
+            function extractCurrencyValue(str) {
+                return +str.slice(1);
+            }
+            alert( extractCurrencyValue('$430,000') );
+        }
 
     </script>
 
@@ -42,11 +90,6 @@
     <a href="#" onclick="exam3();">#3</a>
     <a href="#" onclick="exam4();">#4</a>
     <a href="#" onclick="exam5();">#5</a>
-    <a href="#" onclick="exam6();">#6</a>
-    <a href="#" onclick="exam7();">#7</a>
-    <a href="#" onclick="exam8();">#8</a>
-    <a href="#" onclick="exam9();">#9</a>
-    <a href="#" onclick="exam10();">#10</a>
  
 </body>
 </html>
