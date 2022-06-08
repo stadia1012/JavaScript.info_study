@@ -42,36 +42,57 @@
        function exam2() {
             let arr1 = ['요소1', '요소2', '요소3'];
 
-            alert( arr1.pop() );  // 요소3      pop: 마지막 요소 제거 및 반환
+            alert( arr1.pop() );  // 요소3      *pop: 마지막 요소 제거 및 반환
             alert(arr1);  // 요소1,요소2
 
-            arr1.push('요소4');  //             push: 마지막에 요소 추가
+            arr1.push('요소4');  //             *push: 마지막에 요소 추가
             alert(arr1);  // 요소1,요소2,요소4
 
-            alert( arr1.shift() );  // 요소1     shift: 앞에 요소 제거 및 반환
+            alert( arr1.shift() );  // 요소1    *shift: 앞에 요소 제거 및 반환
             alert(arr1);  // 요소2,요소4
 
-            arr1.unshift('요소0');
+            arr1.unshift('요소0');  //          *unshift: 앞에 요소 추가
             alert(arr1);  // 요소0,요소2,요소4
 
             // push, unshift는 한번에 여러개도 가능 -> ('요소1', '요소2')
        }
-
-
-
+      
+      
+      
        // 배열은 다른 원시 자료형이 아닌 객체형. 엄밀히 말하면 키가 숫자인 객체.
 
        // 배열의 복사 -> 객체이기에 참조를 통해 복사됨.
        function exam3() {
             let arr1 = ['요소1'];
 
-            let arr2 = arr1;
+            let arr2 = arr1;   // 복사
 
             alert( arr1 === arr2 );  // true
-            arr1.push('요소2');
+            arr1.push('요소2');  // arr1에만 push
 
-            alert(arr2);  // 요소1,요소2
+            alert(arr2);  // 요소1,요소2   // arr2에도 push 됨.
        } 
+
+       /**
+        * arr.test = 5 같이 숫자가 아닌 값을 프로퍼티 키로 사용하는 경우
+        * arr[0]과 arr[1000]만 추가하고 그사이에 아무런 요소도 없는 경우
+        * arr[1000], arr[999] 같이 요소를 역순으로 채우는 경우
+        *   -> 이렇게 코드를 작성하면 배열 내장 메소드 사용 불가. 오류는 안나지만, 일반 객체 {} 가 더 적합
+        */
+
+        // 배열 앞 요소를 수정하는 shift, unshift는 모든 요소의 인덱스를 수정하므로 push, pop보다 느림
+
+
+       // 배열과 반복문
+       function exam4() {
+           let arr1 = ['요소1', '요소2', '요소3'];
+
+           for (let i = 0; i < arr1.length; i++) {
+               alert( arr1[i] );
+           }
+       }
+
+
 
     </script>
 
