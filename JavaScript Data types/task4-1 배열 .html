@@ -8,34 +8,34 @@
 
 <body>
     <script>
-       // 객체 기본
+       // 배열 기본
        function exam1() {
             let arr1 = new Array();
             let arr2 = [];
-            // -> 객체 생성하는 두가지 방법
+            // -> 배열 생성하는 두가지 방법
 
             let arr3 = ['요소1', '요소2', '요소3'];  // 초기 요소와 선언
             alert( arr3[0] );  // 요소1
             alert( arr3[1] );  // 요소2
             alert( arr3[2] );  // 요소3
 
-            // 바꾸기
+            // 요소 바꾸기
             arr3[2] = '요소3-1';
             alert( arr3[2] );  // '요소3-1'
 
-            // 배열 길이
+            // 배열 길이 (메소드 아닌 프로퍼티)
             alert(arr3.length)  // 3
 
             // 전체 출력
             alert(arr3)  // 요소1,요소2,요소3-1
 
-            // 마지막 쉼표 가능 (trailing)
+            // 마지막 쉼표 가능 ('trailing')
             let arr4 = [
                 '요소1',
                 '요소2',
                 '요소3',
             ];
-       }    
+        }    
 
 
        // 큐(queue)  관련 메소드 : pop(), push(), shift()
@@ -54,8 +54,8 @@
             arr1.unshift('요소0');  //          *unshift: 앞에 요소 추가
             alert(arr1);  // 요소0,요소2,요소4
 
-            // push, unshift는 한번에 여러개도 가능 -> ('요소1', '요소2')
-       }
+            // push, unshift는 한번에 여러개도 가능 -> arr.push('요소1', '요소2');
+        }
       
       
       
@@ -71,9 +71,9 @@
             arr1.push('요소2');  // arr1에만 push
 
             alert(arr2);  // 요소1,요소2   // arr2에도 push 됨.
-       } 
+        } 
 
-       /**
+       /**  *배열 메소드 사용 불가한 케이스
         * arr.test = 5 같이 숫자가 아닌 값을 프로퍼티 키로 사용하는 경우
         * arr[0]과 arr[1000]만 추가하고 그사이에 아무런 요소도 없는 경우
         * arr[1000], arr[999] 같이 요소를 역순으로 채우는 경우
@@ -90,7 +90,26 @@
            for (let i = 0; i < arr1.length; i++) {
                alert( arr1[i] );
            }
-       }
+        }
+
+        function exam5() {
+            let arr1 = ['요소1', '요소2', '요소3'];
+
+            for (let element of arr1) {
+                alert(element);
+            }
+        }
+
+        // 배열은 객체이기에 for in 문도 가능
+        function exam6() {
+            let arr = ['요소1', '요소2', '요소3'];
+
+            for (let element in arr) {
+                alert( arr[element] );
+            }
+        }
+
+
 
     </script>
 
@@ -99,6 +118,7 @@
     <a href="#" onclick="exam3();">#3</a>
     <a href="#" onclick="exam4();">#4</a>
     <a href="#" onclick="exam5();">#5</a>
+    <a href="#" onclick="exam6();">#6</a>
  
 </body>
 </html>
