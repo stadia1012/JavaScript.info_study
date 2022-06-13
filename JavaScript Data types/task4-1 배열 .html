@@ -92,6 +92,7 @@
            }
         }
 
+        // 'for of 문'은 반복할 수 있는 객체에 사용. Array, Map, Set, arguments 등
         function exam5() {
             let arr1 = ['요소1', '요소2', '요소3'];
 
@@ -100,7 +101,7 @@
             }
         }
 
-        // 배열은 객체이기에 for in 문도 가능
+        // 배열은 객체이기에 'for in 문'도 가능 -> 되도록 쓰면 안 됨. 
         function exam6() {
             let arr = ['요소1', '요소2', '요소3'];
 
@@ -109,7 +110,43 @@
             }
         }
 
+        // length 프로퍼티는 가장 큰 인덱스 +1
+        function exam7() {
+            let arr1 = [];
+            arr1[100] = '요소100';
+            alert(arr1.length);  // 101
+            arr1[123] = '요소123';
+            alert(arr1.length);  // 124
+        }
 
+        function exam8() {
+            let arr1 = [1, 2, 3, 4, 5];
+
+            arr1.length = 2;
+            alert(arr1);
+
+            arr1.length = 5;
+            alert(arr1);
+        }
+
+        
+        // 다차원 배열
+        function exam9() {
+            let matrix = [
+                [1, 2, 3],
+                [4, 5, 6],
+                [7, 8, 9],
+            ];
+            alert( matrix[1][1] );  // 5
+        }
+
+
+        // 문자열로 형변환 됨
+        function exam10() {
+            alert( [] + 1 );  // 1
+            alert( [1] + 1 );  // 11
+            alert( [1,2] + 1 );  // 1,21
+        }
 
     </script>
 
@@ -119,6 +156,10 @@
     <a href="#" onclick="exam4();">#4</a>
     <a href="#" onclick="exam5();">#5</a>
     <a href="#" onclick="exam6();">#6</a>
+    <a href="#" onclick="exam7();">#7</a>
+    <a href="#" onclick="exam8();">#8</a>
+    <a href="#" onclick="exam9();">#9</a>
+    <a href="#" onclick="exam10();">#10</a>
  
 </body>
 </html>
