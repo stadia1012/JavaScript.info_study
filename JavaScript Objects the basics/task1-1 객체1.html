@@ -29,7 +29,7 @@
         }
         
 
-        alert(user.name); //  ***john 가장 먼저 실행.
+        alert(user.name); //  *****john 브라우저에서 가장 먼저 실행*****
         user.isAdmin = true;  // isAdmin 프로퍼티 추가.
         
         // 마지막 프로퍼티 끝은 쉼표로 끝날 수 있음.
@@ -40,7 +40,7 @@
         function exam2() {
             user["likes birds"] = true;  // 입력
             alert(user["likes birds"]);  // true
-            alert(user["age"]);  // 30 // #1을 먼저 실행했다면 undefined. (#1에서 age를 삭제했으므로)
+            alert(user["age"]);  // 30    #1을 먼저 실행했다면 undefined. (#1에서 age를 삭제했으므로)
         };
 
 
