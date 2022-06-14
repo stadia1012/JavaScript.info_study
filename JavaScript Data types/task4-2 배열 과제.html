@@ -8,7 +8,130 @@
 
 <body>
     <script>
-       
+       // 과제1 5가지 작업 실행
+        /* 
+            1. 요소 “Jazz”, "Blues"가 있는 styles 배열을 생성합니다.
+             // Jazz, Blues
+            2. "Rock-n-Roll"을 배열 끝에 추가합니다.
+             // Jazz, Blues, Rock-n-Roll
+            3. 배열 정 중앙에 있는 요소를 "Classics"로 바꿉니다. 가운데 요소를 찾는 코드는 요소가 홀수 개인 배열에서도 잘 작동해야 합니다.
+             // Jazz, Classics, Rock-n-Roll
+            4. 배열의 첫 번째 요소를 꺼내서 출력합니다.
+             // Jazz / Classics, Rock-n-Roll
+            5. "Rap"과 "Reggae"를 배열의 앞에 추가합니다.
+             // Rap, Reggae, Classics, Rock-n-Roll
+        */
+            
+        function exam1() {
+            let styles = ['Jazz', 'Blues'];  
+            alert(styles);  // Jazz,Blues
+
+            styles.push('Rock-n-Roll');
+            alert(styles);  // Jazz,Blues,Rock-n-Roll
+
+            let numCenter = 0
+            if (styles.length % 2) {
+                numCenter = styles.length/2 - 0.5;
+            } else {
+                numCenter = styles.length/2;
+            }
+            styles[numCenter] = 'Classics';
+            alert(styles);  // Jazz,Classics,Rock-n-Roll
+
+            alert( styles.shift() );  // Jazz
+            alert(styles);  // Classics,Rock-n-Roll
+
+            styles.unshift('Rap', 'Reggae');
+            alert(styles);  // Rap,Reggae,Classics,Rock-n-Roll
+
+        // 다 정답이지만 numCenter 부분만 수정하자면, (해답 참고)
+            let styles2 = ['Jazz2', 'Blues2', 'Rock-n-Roll2'];
+            styles2[Math.floor((styles2.length) / 2)] = "Classics2";  // Jazz2,Classics2,Rock-n-Roll2 / math.floor ->  소수점 버림
+            alert(styles2);
+        }
+
+
+        // 아래 함수의 결과는?
+        function exam2() {
+            let arr = ['a', 'b'];
+
+            arr.push(function() {  // arr에 function 추가
+                alert( this );  // -> this는 arr을 참조 
+            })
+
+            arr[2]();  
+        /*
+            a,b,function() {
+                alert( this );
+            }
+            // 주석까지 나온다.
+         */
+        }
+
+        // 함수 sumInput() - 입력한 숫자의 합 구하기
+        /*
+            prompt 창을 띄워 사용자에게 숫자를 입력해 달라고 요청한 후, 입력받은 값들을 배열에 저장합니다.
+            숫자가 아닌 값, 혹은 빈 문자열을 입력하거나 ‘Cancel’ 버튼을 누르면 질문을 멈춥니다.
+            배열 요소의 합을 계산하고 리턴합니다.
+            주의: 숫자 0은 유효한 숫자이므로, 사용자가 0을 입력하더라도 질문이 멈추지 말아야 합니다.
+        */
+        function exam3() {
+
+            // 내가 쓴 답
+            function sumInput() {
+                let arr1 = [];
+            
+                while (1) {
+                    let userNum = prompt('숫자를 입력하세요.');  // +prompt로 받으면 null, 공백이 0으로 바뀜 -> NaN 못 거름
+
+                    if ( +userNum !== NaN && userNum !== null && userNum.trim() !== '') {  // str.trim() -> 앞 뒤 공백 제거
+                        arr1[arr1.length] = +userNum;
+                        alert(arr1);  // 확인용 추가
+                        continue;
+                    } else {
+                        let sumArr = 0;
+                        for (let i = 0; i < arr1.length; i++ ) {
+                            sumArr += arr1[i];
+                        }
+                        return sumArr;
+                    }
+                }
+            }
+
+            alert( sumInput() );
+        }
+        // 평가 : arr1에 추가할때 +붙이는거 무한반복문 전에 arr1 선언 등 대체로 포인트 잘 잡음.
+        // arr.push(), for of문, isFinite 안한 점 아쉽.  // 공백 처리는 답안보다 우수함.
+
+        // 답안 확인 후 다시 작성
+        function exam4() {
+
+            function sumInput() {
+                let arr1 = [];
+            
+                while (1) {
+                    let userNum = prompt('숫자를 입력하세요.');
+
+                    if ( isFinite(userNum) && userNum !== null && userNum.trim() !== '') {
+                        arr1.push(+userNum);
+                        alert(arr1);  // 확인용 추가
+                        continue;
+                    } else {
+                        let sumArr = 0;
+                        for (let i of userNum) {
+                            sumArr += i;
+                        }
+                        return sumArr;
+                    }
+                }
+            }
+
+            alert( sumInput() );
+        }
+
+
+
+
 
     </script>
 
