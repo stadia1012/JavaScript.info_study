@@ -112,13 +112,13 @@
                 while (1) {
                     let userNum = prompt('숫자를 입력하세요.');
 
-                    if ( isFinite(userNum) && userNum !== null && userNum.trim() !== '') {
+                    if ( isFinite(userNum) && userNum !== null && userNum.trim() !== '' ) {
                         arr1.push(+userNum);
                         alert(arr1);  // 확인용 추가
                         continue;
                     } else {
                         let sumArr = 0;
-                        for (let i of userNum) {
+                        for (let i of arr1) {
                             sumArr += i;
                         }
                         return sumArr;
@@ -128,6 +128,34 @@
 
             alert( sumInput() );
         }
+
+        
+        // 최대합 부분 배열
+        /* 
+            입력값은 arr = [1, -2, 3, 4, -9, 6] 같이 숫자로만 구성된 배열이라고 가정해봅시다.
+            우리가 해야 할 일은 인접한 요소의 총합이 최대인 arr의 부분 배열을 찾는 것입니다.
+            부분 배열 요소들의 합을 리턴하는 함수 getMaxSubSum(arr)를 작성해 봅시다.
+
+            예시 : 
+            getMaxSubSum([-1, 2, 3, -9]) == 5 (강조 표시된 요소들의 합)
+            getMaxSubSum([2, -1, 2, 3, -9]) == 6
+            getMaxSubSum([-1, 2, 3, -9, 11]) == 11
+            getMaxSubSum([-2, -1, 1, 2]) == 3
+            getMaxSubSum([100, -9, 2, -3, 5]) == 100
+            getMaxSubSum([1, 2, 3]) == 6 (모든 요소)
+
+            getMaxSubSum([-1, -2, -3]) = 0;
+            요소 전체가 음수라면 아무런 요소도 선택하지 않아야 최댓값이 됩니다
+            (부분 배열은 빈 배열). 그리고 합은 0이 됩니다.
+        */
+        function exam6() {
+            
+            function getMaxSubSum(arr) {
+                
+                arr[i] 
+            }
+        }        
+
 
 
 
