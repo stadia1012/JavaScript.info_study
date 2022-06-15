@@ -149,10 +149,13 @@
             (부분 배열은 빈 배열). 그리고 합은 0이 됩니다.
         */
         function exam6() {
-            
+
             function getMaxSubSum(arr) {
-                
-                +arr[i] + arr[i] + +arr[i+1]
+                for ( let i = 0; i < arr.length-1; i++ ) {
+                    if (+arr[i] ) {                         // 다음이 음수면 더하기
+                        +arr[i] + +arr[i+1] + +arr[i+2]
+                    }
+                }
             }
         }        
 
