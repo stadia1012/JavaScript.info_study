@@ -148,45 +148,68 @@
             요소 전체가 음수라면 아무런 요소도 선택하지 않아야 최댓값이 됩니다
             (부분 배열은 빈 배열). 그리고 합은 0이 됩니다.
         */
-        // 매 덧셈의 결과를 배열의 요소로 추가. 그리고 가장 큰 요소값을 반환 
+        
         function exam6() {
 
             function getMaxSubSum(arr) {
                 let sumArr = [0];
                 let tempSum = 0;
                 for ( let i = 0; i < arr.length; i++ ) {  // i는 시작
-                    let k = i;
                     for ( let j = 0; j < arr.length; j++ ) {  // j는 끝 -> i부터 j까지 더함
+                        let k = i;
+                        tempSum = 0;
                         if ( k > j ) {
                             continue;
                         }
                         if ( k == j ) {
                             tempSum = arr[k];
                             sumArr.push(tempSum);
-                            tempSum = 0;
                             continue;
                         } 
-                        
-                        tempSum = 0;
                         while ( k <= j ) {
                             tempSum += arr[k];
                             k++;
                         }
                         sumArr.push(tempSum);
-                        tempSum = 0;
-                        k = i;
                         continue;
                     }
                 }
                 let maxNum = 0;
-                for ( let i = 0; i < sumArr.length; i++ ) {
+                for ( let i = 0; i < sumArr.length; i++ ) {  // 만들어진 sumArr에서 가장 큰 값 찾기
                     if ( maxNum < sumArr[i] ) {
                         maxNum = sumArr[i];
                     }
                 }
                 console.log(sumArr);
                 return maxNum;
-                    
+            }
+
+            alert( getMaxSubSum([-1, 2, 3, -9]) );  // 5
+            alert( getMaxSubSum([2, -1, 2, 3, -9]) );  // 6
+            alert( getMaxSubSum([-1, 2, 3, -9, 11]) );  // 11
+            alert( getMaxSubSum([-2, -1, 1, 2]) );  // 3
+            alert( getMaxSubSum([100, -9, 2, -3, 5]) );  // 100
+            alert( getMaxSubSum([1, 2, 3]) );  // 6
+            alert( getMaxSubSum([-1, -2, -3]) );  // 0
+        }       
+        /* 내 답안 : 매 덧셈의 결과를 배열의 요소로 추가. 그리고 가장 큰 요소값을 반환
+            결론 : 매우 비효율적. 배열 파트이기에 이 방법이 정답인줄 알았으나, 굳이 새로운 배열 생성할 필요 없음
+        */
+
+        // 답안1 - 느린 해답
+        function exam7() {
+            function getMaxSubSum(arr) {
+                let maxSum = 0;  // 어떤 요소도 선택하지 않으면 0을 반환
+
+                for (let i = 0; i < arr.length; i++) {
+                    let sumFixedStart = 0;
+                    for (let j = i; j < arr.length; j++) {
+                        sumFixedStart += arr[j];
+                        maxSum = Math.max(maxSum, sumFixedStart);
+                    }
+                }
+
+                return maxSum;
             }
             alert( getMaxSubSum([-1, 2, 3, -9]) );  // 5
             alert( getMaxSubSum([2, -1, 2, 3, -9]) );  // 6
@@ -195,9 +218,34 @@
             alert( getMaxSubSum([100, -9, 2, -3, 5]) );  // 100
             alert( getMaxSubSum([1, 2, 3]) );  // 6
             alert( getMaxSubSum([-1, -2, -3]) );  // 0
-        }        
+        }
+        // 같은 로직이지만 훨씬 짧고 단순. (i부터 j까지 더한다.)
 
-        // 다시 
+
+
+        // 빠른 해답
+        function exam8() {
+            function getMaxSubSum(arr) {
+                let maxSum = 0;
+                let partialSum = 0;
+
+                for (let item of arr) {  // 배열의 각 요소를
+                    partialSum += item;  // partialSum에 더합니다.
+                    maxSum = Math.max(maxSum, partialSum);  // 최대값을 기억해 놓습니다.
+                    if (partialSum < 0) partialSum = 0;  // 음수가 되면 0을 대입합니다.
+                }
+
+                return maxSum;
+            }
+
+            alert( getMaxSubSum([-1, 2, 3, -9]) );  // 5
+            alert( getMaxSubSum([2, -1, 2, 3, -9]) );  // 6
+            alert( getMaxSubSum([-1, 2, 3, -9, 11]) );  // 11
+            alert( getMaxSubSum([-2, -1, 1, 2]) );  // 3
+            alert( getMaxSubSum([100, -9, 2, -3, 5]) );  // 100
+            alert( getMaxSubSum([1, 2, 3]) );  // 6
+            alert( getMaxSubSum([-1, -2, -3]) );  // 0
+        }
 
     </script>
 
@@ -207,6 +255,7 @@
     <a href="#" onclick="exam4();">#4</a>
     <a href="#" onclick="exam5();">#5</a>
     <a href="#" onclick="exam6();">#6</a>
- 
+    <a href="#" onclick="exam7();">#7</a>
+    <a href="#" onclick="exam8();">#8</a>
 </body>
 </html>
