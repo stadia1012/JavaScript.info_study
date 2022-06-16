@@ -21,10 +21,12 @@
         // splice
         // arr.splice(index[, deleteCount, elem1, ..., elemN])
         function exam2() {
+            // 제거
             let arr1 = ['1', '2', '3', '4', '5'];
             arr1.splice(1, 2);  // [1]부터 2개를 제거
             alert(arr1);  // 1,4,5
 
+            // 제거 후 추가
             let arr2 = ['1', '2', '3', '4', '5', '6'];
             arr2.splice(2, 3, 'a', 1);  // [2]부터 3개를 제거. 그 자리를 a, 1로 교체
             alert(arr2);  // 1,2,a,1,6
@@ -33,13 +35,17 @@
             let arr3 = [1, 2, 3, 4, 5];
             let spArr = arr3.splice(1, 3);
             alert(spArr);  // 2,3,4
-            alert( spArr[1] );  // 3
+            alert( spArr[1] );  // 3  -> spArr이 진짜 배열임
+
         }
 
 
         // splice 응용
         function exam3() {
-            
+            // 제거 없이 추가
+            let arr1 = [1, 2, 3, 4, 5];
+            arr1.splice(2, 0, '제거', '없이', '추가');
+            alert(arr1);
         }
 
 
