@@ -19,7 +19,9 @@
 
 
         // splice
-        // arr.splice(index[, deleteCount, elem1, ..., elemN])
+        /* arr.splice(index[, deleteCount, elem1, ..., elemN]) 
+           index: 시작 / deleteCount: 제거할 개수 / elem: 추가할 요소
+        */
         function exam2() {
             // 제거
             let arr1 = ['1', '2', '3', '4', '5'];
@@ -44,8 +46,24 @@
         function exam3() {
             // 제거 없이 추가
             let arr1 = [1, 2, 3, 4, 5];
-            arr1.splice(2, 0, '제거', '없이', '추가');
-            alert(arr1); 
+            arr1.splice(2, 0, '제거', '없이', '추가');  // [2]번째에 0개 제거
+            alert(arr1);  // 1,2,제거,없이,추가,3,4,5
+
+
+            // 음수 인덱스 사용 가능 (-0은 없고 뒤에서부터 -1)
+            let arr2 = [1, 2, 5];
+
+            arr2.splice(-1, 0, 3, 4);  // 3, 4 추가
+            alert(arr2);  // 1,2,3,4,5
+        }
+
+
+        // arr.slice(start, end);
+        /* 
+          
+        */
+        function exam4() {
+            let arr1 = []
         }
 
 
