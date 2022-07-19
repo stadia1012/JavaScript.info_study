@@ -106,9 +106,15 @@
 
         }
 
-
+        // forEach
+        // arr.forEach( function(item, index, array) )
         function exam6() {
-            
+            ["A1", "B2", "C3"].forEach((item, index, array) => {
+                alert(`${item} is at index ${index} in ${array}`);
+                // A1 is at index 0 in A1,B2,C3
+                // B2 is at index 1 in A1,B2,C3
+                // C3 is at index 2 in A1,B2,C3
+            });
         }
 
 
@@ -124,6 +130,7 @@
     <a href="#" onclick="exam3();">#3</a>
     <a href="#" onclick="exam4();">#4</a>
     <a href="#" onclick="exam5();">#5</a>
+    <a href="#" onclick="exam6();">#6</a>
   
 </body>
 </html>
