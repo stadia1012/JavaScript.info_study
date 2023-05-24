@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <!--브라우저 문서: DOM - childNode, children-->
+    <meta charset='utf-8'>
+    <link rel="stylesheet" href="taskCSS_1.css" type="text/css">
+
+    <script>
+        /*
+        #DOM 트리 상단의 노드들은 document가 제공하는 프로퍼티를 사용해 접근할 수 있다.
+
+        <HTML> -> document.documentElement
+        <body> -> document.body
+        <head> = document.head
+        
+        DOM에서 null은 존재하지 않거나 또는 해당하는 노드가 없음을 의미.
+        head 안에 있는 스크립트에선 documet.body에 접근할 수 없다. -> null
+        */ 
+        alert( document.body ); // null -> 브라우저가 아직 body를 읽지 못함.
+        
+        function exam1() {
+            alert( document.body ); // exam1 버튼을 누를 땐, 읽은 후이므로 실행됨.
+        }
+    </script>
+</head>
+
+<body>
+    <div id="container"><div style="width: 100px; height: 100px; background-color: rgb(119, 119, 119); display: inline-block;">div1</div><div style="width: 100px; height: 100px; background-color: rgb(163, 163, 163); display: inline-block;">div2</div>
+    <!-- container End -->
+    </div>
+    
+
+    <script>
+        function exam2() {
+            alert( document.body ); // [object HTMLBodyElement]
+            alert( document.body.innerHTML ); // body 내 text를 반환
+        }
+
+        /* childNodes vs children*/
+
+        // childNodes는 모든 요소를 반환
+        // div에 줄바꿈, 공백이 없어야 아래 코드가 작동. 줄바꿈도 text인 node이기 때문
+        let container = document.getElementById("container");
+        function exam3() {
+            let div1 = container.childNodes[0];
+            div1.innerText = "test1";
+        }
+        function exam4() {
+            let div2 = container.childNodes[1];
+            div2.innerText = "test2";
+        }
+        function exam5() {
+            let containerNodes = document.querySelector('#container').childNodes;
+            let containerNodesList = "";
+            for(let i = 0; i < containerNodes.length; i++) {
+                containerNodesList += containerNodes[i] + "\n";
+            }
+            alert(containerNodesList);  // 모든 노드 반환
+        }
+        /*
+        childNodes 외에 firstChild, lastChild로 첫번재, 마지막 자식 노드 접근 가능.
+
+        자식 노드가 존재한다면, 아래는 항상 참이다.
+        elem.childNodes[0] === elem.firstChild
+        elem.childNodes[elem.childNodes.length - 1] === elem.lastChild
+        */
+        
+        // children은 자식 요소만 반환. (비 요소 노드는 미포함)
+        function exam6() {
+            let containerNodes2 = document.querySelector('#container').children;
+            let containerNodesList2 = "";
+            for(let i = 0; i < containerNodes2.length; i++) {
+                containerNodesList2 += containerNodes2[i] + "\n";
+            }
+            alert(containerNodesList2);  // [object HTMLDivElement]\n[object HTMLDivElement]
+        }
+
+        // 이때, for가 아닌 forEach를 쓰면 안된다. array가 아닌 Collection을 반환하기 때문.
+        // collection은 for..of는 사용 가능
+        function exam7() {
+            alert("exam7")
+            let containerNodes3 = document.querySelector('#container').children;
+            let containerNodesList3 = "";
+            for( let element of containerNodes3 ) {
+                containerNodesList3 += element + "\n";
+            }
+            alert(containerNodesList3);  // [object HTMLDivElement]\n[object HTMLDivElement]
+        }
+
+        // Array.from()을 적용하면 진짜 배열을 만들 수도 있다. 
+        function exam8() {
+            alert("exam8")
+            let NodesArray = Array.from( document.querySelector('#container').children );
+            let NodesArrayList = "";
+            NodesArray.forEach( element => NodesArrayList += element + "\n" );
+
+            alert(NodesArrayList);  // [object HTMLDivElement]\n[object HTMLDivElement]
+        }
+
+
+        /**
+         * 기타 : 
+         * DOM collection은 읽기만 가능. (자식노드 교체 불가)
+         * for..of는 가능하지만 for..in을 사용하면 안 됨. -> 0, 1, length, item, values 등 불필요한 프로퍼티까지도 출력
+         * 
+         */
+    </script>
+
+    <a href="#" onclick="exam1();">#1</a>
+    <a href="#" onclick="exam2();">#2</a>
+    <a href="#" onclick="exam3();">#3</a>
+    <a href="#" onclick="exam4();">#4</a>
+    <a href="#" onclick="exam5();">#5</a>
+    <a href="#" onclick="exam6();">#6</a>
+    <a href="#" onclick="exam7();">#7</a>
+    <a href="#" onclick="exam8();">#8</a>
+
+</body>
+</html>

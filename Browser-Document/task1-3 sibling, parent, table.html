@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <!--브라우저 문서: DOM - sibling, parent, table-->
+    <meta charset='utf-8'>
+    <link rel="stylesheet" href="taskCSS_1.css" type="text/css">
+    <style>
+    table, th, td { border: 1px solid black; border-collapse: collapse; }
+    table { margin: 10px; }
+    td { padding: 10px; }
+    </style>
+
+</head><body>
+    <!--head와 body사이 줄바꿈 없어야-->
+    <div id="container">
+        <div id="div1" style="width: 100px; height: 100px; background-color: rgb(119, 119, 119); display: inline-block;">div1</div>
+        <div id="div2" style="width: 100px; height: 100px; background-color: rgb(163, 163, 163); display: inline-block;">div2</div>
+    <!-- container End -->
+    </div>
+
+    <table id="table01">
+        <tr>
+            <td>일</td><td>이</td>
+        </tr>
+        <tr>
+            <td>삼</td><td>사</td>
+        </tr>
+    </table>
+
+    <script>
+        function exam1() {
+            alert( "document.documentElement와 document.body.parentNode는 같은 <html>을 가리킨다." );
+            alert( document.body.parentNode );  // [object HTMLHtmlElement]
+            alert( document.documentElement );  // [object HTMLHtmlElement]
+        }
+        function exam2() {
+            alert( "<head>의 다음 형제 노드는 <body>" );
+            alert( document.head.nextSibling );  // [object HTMLBodyElement]
+        }
+        function exam3() {
+            alert( "<body>의 이전 형제 노드는 <head>" );
+            alert( document.body.previousSibling );  // [object HTMLHeadElement]
+        }
+
+        /* previousElementSibling, nextElementSibling는 요소 노드만 반환 */
+        // previousSibling vs previousElementSibling
+        function exam4() {
+            alert( document.getElementById("div2").previousSibling );  // [object Text] -> 줄바꿈이 Text 노드로 표시.
+            alert( document.getElementById("div2").previousElementSibling );  // [object HTMLDivElement]
+        }
+        // nextSibling vs nextElementSibling
+        function exam5() {
+            alert( document.getElementById("div1").nextSibling );  // [object Text] -> 줄바꿈이 Text 노드로 표시.
+            alert( document.getElementById("div1").nextElementSibling );  // [object HTMLDivElement]
+        }
+
+        /* 
+        parentNode: 종류에 상관없이 반환
+        parentElement: 부모 '요소 노드'를 반환하
+        */
+        function exam6() {
+            alert( "document.documentElement.parentNode = "
+            + document.documentElement.parentNode );  // document
+            alert( "document.documentElement.parentElement = "
+            + document.documentElement.parentElement );  // null
+            // document 노드는 요소가 아님
+        }
+
+        /* table */
+        // DOM에서 지원하는 추가 프로퍼티. 가장 대표적인 table
+        function exam7() {
+            let td = table01.rows[1].cells[1];
+            td.style.backgroundColor = "blue";
+            setTimeout( () => td.style.backgroundColor = "", 1500 );
+        }
+
+
+        /*
+        ## 브라우저 task 1-2, 1-3 요약 ##
+        #모든 노드 적용: parentNode, childNodes, firstChild, lastChild, previousSibling, nextSibling
+        #요소 노드만 적용: parentElement, children, firstElementChild, lastElementChild, previousElementSibling, nextElementSibling
+        */
+
+    </script>
+
+    <a href="#" onclick="exam1();">#1</a>
+    <a href="#" onclick="exam2();">#2</a>
+    <a href="#" onclick="exam3();">#3</a>
+    <p></p>
+    <a href="#" onclick="exam4();">#4</a>
+    <a href="#" onclick="exam5();">#5</a>
+    <a href="#" onclick="exam6();">#6</a>
+    <p></p>
+    <a href="#" onclick="exam7();">#7</a>
+</body>
+</html>
